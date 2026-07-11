@@ -15,6 +15,7 @@ SOURCES += \
     song.cpp
 
 HEADERS += \
+    abstractrepository.h \
     account.h \
     album.h \
     mainwindow.h \
