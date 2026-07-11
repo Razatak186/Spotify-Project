@@ -9,11 +9,13 @@ CONFIG += c++17
 SOURCES += \
     account.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    song.cpp
 
 HEADERS += \
     account.h \
-    mainwindow.h
+    mainwindow.h \
+    song.h
 
 FORMS += \
     mainwindow.ui
