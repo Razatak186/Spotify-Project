@@ -18,13 +18,13 @@ public:
             std::string password, int role);
 
 
-    int getId();
-    std::string getFullName();
-    std::string getUserName();
-    std::string getBio();
-    std::string getPassword();
-    int getRole();
-    QImage getProfilePicture();
+    int getId()const;
+    std::string getFullName()const;
+    std::string getUserName()const;
+    std::string getBio()const;
+    std::string getPassword()const;
+    int getRole()const;
+    QImage getProfilePicture()const;
 
     void setId(int id);
     void setFullname(const std::string& fullname);
@@ -34,8 +34,8 @@ public:
     void setRole(int role);
     void setProfilePicture(const QImage& profilePicture);
 
-    bool isArtist();
-    bool isListener();
+    bool isArtist()const;
+    bool isListener()const;
 };
 
 #endif // ACCOUNT_H
