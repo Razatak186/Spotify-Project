@@ -9,6 +9,7 @@ CONFIG += c++17
 SOURCES += \
     account.cpp \
     album.cpp \
+    artistrepository.cpp \
     main.cpp \
     mainwindow.cpp \
     playlist.cpp \
@@ -19,6 +20,7 @@ HEADERS += \
     account.h \
     accountrepository.h \
     album.h \
+    artistrepository.h \
     mainwindow.h \
     playlist.h \
     song.h

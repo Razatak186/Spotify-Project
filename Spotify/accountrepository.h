@@ -9,7 +9,7 @@
 class AccountRepository : public AbstractRepository<Account>
 {
 public:
-    virtual std::optional<Account> searchByUsername(const std::string& username)=0;
+    virtual std::optional<Account> searchByUserName(const std::string& username)=0;
 };
 
 #endif // ACCOUNTREPOSITORY_H
