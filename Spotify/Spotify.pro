@@ -17,6 +17,7 @@ SOURCES += \
 HEADERS += \
     abstractrepository.h \
     account.h \
+    accountrepository.h \
     album.h \
     mainwindow.h \
     playlist.h \
