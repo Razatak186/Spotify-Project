@@ -10,6 +10,7 @@ SOURCES += \
     account.cpp \
     album.cpp \
     albumrepository.cpp \
+    appcontroller.cpp \
     artistrepository.cpp \
     listenerrepository.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     accountrepository.h \
     album.h \
     albumrepository.h \
+    appcontroller.h \
     artistrepository.h \
     listenerrepository.h \
     mainwindow.h \

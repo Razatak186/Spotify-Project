@@ -7,6 +7,7 @@ ListenerRepository::ListenerRepository(PlaylistRepository& playlistRepo) : playl
 int ListenerRepository::save(const Account& item){
     if(!item.isListener()) throw std::invalid_argument("Invalid role for listener");
 
+    bool isNew = true;
     for(auto& listener : listeners){
         if(listener.getId() == item.getId()){
             listener = item;
@@ -23,6 +24,10 @@ int ListenerRepository::save(const Account& item){
     int newID = maxID +1;
     newAccount.setId(newID);
     listeners.push_back(newAccount);
+    if(isNew){
+        Playlist favSongs(0,"Favorite Songs", newID);
+        playlistRepo.save(favSongs);
+    }
     return newID;
 
 }
@@ -54,7 +59,7 @@ std::optional<Account> ListenerRepository::searchByUserName(const std::string& u
     return std::nullopt;
 }
 
-void ListenerRepository::upfateLiked(int listenerId , int songId , bool liked){
+void ListenerRepository::updateLiked(int listenerId , int songId , bool liked){
     std::vector<Playlist> listenerPlaylists = playlistRepo.playlist(listenerId);
 
     for(const auto& pl : listenerPlaylists){
@@ -67,10 +72,11 @@ void ListenerRepository::upfateLiked(int listenerId , int songId , bool liked){
             return;
         }
     }
+    throw std::runtime_error("Favorite Songs playlist not found for this listener");
 }
 
 bool ListenerRepository::isLiked(int listenerId , int songId){
-    std::vector<Playlist> listenerPlaylists = playlistRepo.playlists(listenerId);
+    std::vector<Playlist> listenerPlaylists = playlistRepo.playlist(listenerId);
 
     for(const auto& pl : listenerPlaylists){
         if(pl.getName() == "Favorite Songs"){

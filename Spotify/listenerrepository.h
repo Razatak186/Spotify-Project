@@ -17,7 +17,7 @@ public:
     std::optional<Account> search(int id)override;
     std::optional<Account> searchByUserName(const std::string& username)override;
 
-    void upfateLiked(int listenerId , int songId , bool liked);
+    void updateLiked(int listenerId , int songId , bool liked);
     bool isLiked(int listenerId , int songId);
 };
 
