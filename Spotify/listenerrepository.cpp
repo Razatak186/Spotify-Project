@@ -2,6 +2,8 @@
 #include<stdexcept>
 #include<algorithm>
 
+ListenerRepository::ListenerRepository(PlaylistRepository& playlistRepo) : playlistRepo(playlistRepo){}
+
 int ListenerRepository::save(const Account& item){
     if(!item.isListener()) throw std::invalid_argument("Invalid role for listener");
 
@@ -52,3 +54,28 @@ std::optional<Account> ListenerRepository::searchByUserName(const std::string& u
     return std::nullopt;
 }
 
+void ListenerRepository::upfateLiked(int listenerId , int songId , bool liked){
+    std::vector<Playlist> listenerPlaylists = playlistRepo.playlist(listenerId);
+
+    for(const auto& pl : listenerPlaylists){
+        if(pl.getName()== "Favorite Songs"){
+            if(liked){
+                playlistRepo.insertSong(pl.getId(), songId);
+            }else{
+                playlistRepo.removeSong(pl.getId(),songId);
+            }
+            return;
+        }
+    }
+}
+
+bool ListenerRepository::isLiked(int listenerId , int songId){
+    std::vector<Playlist> listenerPlaylists = playlistRepo.playlists(listenerId);
+
+    for(const auto& pl : listenerPlaylists){
+        if(pl.getName() == "Favorite Songs"){
+            return pl.hasSong(songId);
+        }
+    }
+    return false;
+}

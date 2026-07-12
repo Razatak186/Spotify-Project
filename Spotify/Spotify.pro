@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     playlist.cpp \
+    playlistrepository.cpp \
     song.cpp \
     songrepository.cpp
 
@@ -28,6 +29,7 @@ HEADERS += \
     listenerrepository.h \
     mainwindow.h \
     playlist.h \
+    playlistrepository.h \
     song.h \
     songrepository.h
 
