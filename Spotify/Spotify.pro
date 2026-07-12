@@ -9,6 +9,7 @@ CONFIG += c++17
 SOURCES += \
     account.cpp \
     album.cpp \
+    albumrepository.cpp \
     artistrepository.cpp \
     listenerrepository.cpp \
     main.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     account.h \
     accountrepository.h \
     album.h \
+    albumrepository.h \
     artistrepository.h \
     listenerrepository.h \
     mainwindow.h \
