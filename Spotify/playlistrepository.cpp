@@ -68,3 +68,9 @@ std::vector<Playlist> PlaylistRepository::playlist(int listenerId){
     }
     return result;
 }
+
+void PlaylistRepository::removeSongFromAllPlaylists(int songId){
+    for(auto& playlist : playlists){
+        playlist.removeSong(songId);
+    }
+}
