@@ -49,3 +49,11 @@ std::optional<Account> ArtistRepository::searchByUserName(const std::string& use
     }
     return std::nullopt;
 }
+
+std::vector<Account> ArtistRepository::getAllArtists(){
+    std::vector<Account> result;
+    for(auto& artist : artists){
+        result.push_back(artist);
+    }
+    return result;
+}

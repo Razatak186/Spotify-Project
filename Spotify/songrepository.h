@@ -20,6 +20,7 @@ public:
     std::vector<Song> getByArtist(int artistId);
     std::vector<Song> getByPlaylist(const std::vector<int>& songIds);
     std::vector<Song> getByLikedSongs(const std::vector<int>& songIds);
+    std::vector<Song> getAll() const;
 };
 
 #endif // SONGREPOSITORY_H

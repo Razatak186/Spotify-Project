@@ -8,10 +8,10 @@
 class AppController
 {
 private:
-    PlaylistRepository playlistRepo;
-    ArtistRepository artist;
-    ListenerRepository listener;
+    ArtistRepository&  artist;
+    ListenerRepository& listener;
 public:
+    AppController(ArtistRepository& artistRepo, ListenerRepository& listenerRepo);
     void registeration(std::string fullName , std::string userName , std::string password , int role);
     Account login(std::string userName , std::string password);
 };

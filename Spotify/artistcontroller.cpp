@@ -1,5 +1,10 @@
 #include "artistcontroller.h"
 #include<stdexcept>
+#include<algorithm>
+
+ArtistController::ArtistController(AlbumRepository& albumRepo , SongRepository& songRepo , PlaylistRepository& playlistRepo):
+    albumRepo(albumRepo), songRepo(songRepo) , playlistRepo(playlistRepo){}
+
 int ArtistController::createAlbum(int artistId , std::string name){
     Album newAlbum(0,name , artistId);
     int newId = albumRepo.save(newAlbum);
@@ -85,6 +90,37 @@ int ArtistController::editAlbum(int albumId , int artistId,
         throw std::runtime_error("You don't have permission to edit this album.");
     }
 
+    std::vector<int> oldSongIds = oldAlbum->getSongIds();
+    for(int id : oldSongIds){
+        auto it = std::find(songIds.begin(), songIds.end(), id);
+        if(it == songIds.end()){
+            std::optional<Song> song = songRepo.search(id);
+            if(song.has_value()){
+                if(song->getArtistId() == artistId){
+                    song->setAlbumId(0);
+                    songRepo.save(song.value());
+                }else{
+                     throw std::runtime_error("You don't have permission to edit this song.");
+                }
+            }
+        }
+    }
+
+    for(int id : songIds){
+        auto it = std::find(oldSongIds.begin(), oldSongIds.end(), id);
+        if(it == oldSongIds.end()){
+            std::optional<Song> song = songRepo.search(id);
+            if(song.has_value()){
+                if(song->getArtistId()==artistId){
+                    song->setAlbumId(albumId);
+                    songRepo.save(song.value());
+                }else{
+                     throw std::runtime_error("You don't have permission to edit this song.");
+                }
+            }
+        }
+    }
+
     Album newAlbum = oldAlbum.value();
     newAlbum.setName(name);
     newAlbum.setSongIds(songIds);
@@ -111,9 +147,9 @@ bool ArtistController::deleteSong(int songId , int artistId){
         }
     }
 
-    if(playlistRepo != nullptr){
-        playlistRepo->removeSongFromAllPlaylists(songId);
-    }
+
+        playlistRepo.removeSongFromAllPlaylists(songId);
+
 
     return songRepo.remove(songId);
 }

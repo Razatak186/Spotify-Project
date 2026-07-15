@@ -13,6 +13,7 @@ SOURCES += \
     appcontroller.cpp \
     artistcontroller.cpp \
     artistrepository.cpp \
+    listenercontroller.cpp \
     listenerrepository.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     appcontroller.h \
     artistcontroller.h \
     artistrepository.h \
+    listenercontroller.h \
     listenerrepository.h \
     mainwindow.h \
     playlist.h \

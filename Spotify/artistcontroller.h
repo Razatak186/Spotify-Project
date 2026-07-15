@@ -10,10 +10,13 @@
 class ArtistController
 {
 private:
-    AlbumRepository albumRepo;
-    SongRepository songRepo;
-    PlaylistRepository* playlistRepo;
+    AlbumRepository& albumRepo;
+    SongRepository& songRepo;
+    PlaylistRepository& playlistRepo;
 public:
+    ArtistController(AlbumRepository& albumRepo , SongRepository& songRepo ,PlaylistRepository& playlistRepo );
+
+
     int createAlbum(int artistId , std::string name);
     int createSong(int artistId , std::string title, std::string genre,
                    int releaseYear , std::string filePath , int albumId=0);

@@ -83,3 +83,7 @@ std::vector<Song> SongRepository::getByPlaylist(const std::vector<int>& songIds)
 std::vector<Song> SongRepository::getByLikedSongs(const std::vector<int>& songIds){
     return getByPlaylist(songIds);
 }
+
+std::vector<Song> SongRepository::getAll()const{
+    return songs;
+}

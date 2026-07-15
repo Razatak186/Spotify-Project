@@ -12,7 +12,7 @@ public:
     bool remove(int id) override;
     std::optional<Account> search(int id)override;
     std::optional<Account> searchByUserName(const std::string& username)override;
-
+    std::vector<Account> getAllArtists();
 };
 
 #endif // ARTISTREPOSITORY_H

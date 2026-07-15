@@ -1,5 +1,7 @@
 #include "appcontroller.h"
 
+AppController::AppController(ArtistRepository& artistRepo , ListenerRepository& listenerRepo) : artist(artistRepo), listener(listenerRepo){}
+
 void AppController::registeration(std::string fullName , std::string userName , std::string password , int role){
     std::optional<Account> result = artist.searchByUserName(userName);
     if(result.has_value()){
