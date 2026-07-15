@@ -20,7 +20,8 @@ SOURCES += \
     playlist.cpp \
     playlistrepository.cpp \
     song.cpp \
-    songrepository.cpp
+    songrepository.cpp \
+    sorthelper.cpp
 
 HEADERS += \
     abstractrepository.h \
@@ -37,7 +38,8 @@ HEADERS += \
     playlist.h \
     playlistrepository.h \
     song.h \
-    songrepository.h
+    songrepository.h \
+    sorthelper.h
 
 FORMS += \
     mainwindow.ui

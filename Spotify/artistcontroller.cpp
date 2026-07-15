@@ -1,4 +1,5 @@
 #include "artistcontroller.h"
+#include "sorthelper.h"
 #include<stdexcept>
 #include<algorithm>
 
@@ -186,4 +187,16 @@ std::vector<Song> ArtistController::getSingleSongs(int artistId){
 
 std::vector<Song> ArtistController::getAllSongs(int artistId){
     return songRepo.getByArtist(artistId);
+}
+
+std::vector<Song> ArtistController::searchSong(int artistId ,const std::string& query){
+    return SortHelper::searchByTitle(getAllSongs(artistId), query);
+}
+
+std::vector<Song> ArtistController::filterByGenre(int artistId , const std::string& genre){
+    return SortHelper::filterByGenre(getAllSongs(artistId), genre);
+}
+
+std::vector<Song> ArtistController::filterByYear(int artistId, int year){
+    return SortHelper::filterByYear(getAllSongs(artistId), year);
 }

@@ -44,3 +44,63 @@ Account AppController::login(std::string userName , std::string password){
 
      throw std::runtime_error("No account found whit this username.");
 }
+
+void AppController::editAccount(int accountId , bool isArtist , std::string newFullName , std::string newUserName , std::string newPassword){
+    std::optional<Account> thisAccount;
+    if(isArtist){
+        thisAccount = artist.search(accountId);
+    }else{
+        thisAccount = listener.search(accountId);
+    }
+    if(!thisAccount.has_value()){
+        throw std::runtime_error("No account found with this id.");
+    }
+
+    std::optional<Account> existingInArtist = artist.searchByUserName(newUserName);
+    if(existingInArtist.has_value()){
+        bool isSameAccount = isArtist && (existingInArtist->getId()== accountId);
+        if(!isSameAccount){
+            throw std::runtime_error("Account with this username already exists.");
+        }
+
+    }
+
+    std::optional<Account> existInListener = listener.searchByUserName(newUserName);
+    if(existInListener.has_value()){
+        bool isSameAccount = !isArtist && (existInListener->getId() == accountId);
+        if(!isSameAccount){
+            throw std::runtime_error("Account with this username already exists.");
+        }
+    }
+
+    thisAccount->setFullname(newFullName);
+    thisAccount->setUsername(newUserName);
+    thisAccount->setPassword(newPassword);
+
+    if(isArtist){
+        artist.save(thisAccount.value());
+    }else{
+        listener.save(thisAccount.value());
+    }
+
+}
+
+void AppController::deleteAccount(int accountid, bool isArtist){
+    std::optional<Account> account;
+    if(isArtist){
+        account = artist.search(accountid);
+    }else{
+        account = listener.search(accountid);
+    }
+
+    if(!account.has_value()){
+        throw std::runtime_error("No account found.");
+    }
+
+    if(isArtist){
+        artist.remove(accountid);
+    }else{
+        listener.remove(accountid);
+    }
+
+}

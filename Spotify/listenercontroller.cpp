@@ -1,4 +1,5 @@
 #include "listenercontroller.h"
+#include "sorthelper.h"
 #include<stdexcept>
 
 ListenerController::ListenerController(PlaylistRepository& playlistRepo , SongRepository& songRepo ,
@@ -122,37 +123,13 @@ std::vector<Song> ListenerController::getFavoriteSongs(int listenerId){
 }
 
 std::vector<Song> ListenerController::searchSong(const std::string& query){
-    std::vector<Song> all = songRepo.getAll();
-    std::vector<Song> result;
-
-    for(const auto& song : all){
-        if(song.getTitle().find(query) != std::string::npos){
-            result.push_back(song);
-        }
-    }
-    return result;
+    return SortHelper::searchByTitle(songRepo.getAll(), query);
 }
 
 std::vector<Song> ListenerController::filterByGenre(const std::string& genre){
-    std::vector<Song> all = songRepo.getAll();
-    std::vector<Song> result;
-
-    for(const auto& song : all){
-        if(song.getGenre() == genre){
-            result.push_back(song);
-        }
-    }
-    return result;
+    return SortHelper::filterByGenre(songRepo.getAll(), genre);
 }
 
 std::vector<Song> ListenerController::filterByYear(int year){
-    std::vector<Song> all = songRepo.getAll();
-    std::vector<Song> result;
-
-    for(const auto& song : all){
-        if(song.getReleaseYear() == year){
-            result.push_back(song);
-        }
-    }
-    return result;
+    return SortHelper::filterByYear(songRepo.getAll() , year);
 }
