@@ -2,6 +2,7 @@
 #define ACCOUNT_H
 #include<QImage>
 #include <string>
+#include<QJsonObject>
 class Account
 {
 private:
@@ -36,6 +37,9 @@ public:
 
     bool isArtist()const;
     bool isListener()const;
+
+    QJsonObject toJson()const;
+    static Account fromJson(const QJsonObject& obj);
 };
 
 #endif // ACCOUNT_H

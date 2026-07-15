@@ -37,3 +37,30 @@ bool Playlist::hasSong(int songId)const{
 int Playlist::getSongCount()const{
     return songIds.size();
 }
+
+QJsonObject Playlist::toJson()const{
+    QJsonObject obj;
+    obj["id"] = id;
+    obj["listenerId"] = listenerId;
+    obj["name"] = QString::fromStdString(name);
+    QJsonArray arr ;
+    for( int id : songIds){
+        arr.append(id);
+    }
+    obj["songsIds"] = arr;
+    return obj;
+}
+
+Playlist Playlist::fromJson(const QJsonObject& obj){
+    Playlist p;
+    p.setId(obj["id"].toInt());
+    p.setListenerId(obj["listenerId"].toInt());
+    p.setName(obj["name"].toString().toStdString());
+    std::vector<int> songsIds;
+    const QJsonArray arr = obj["songsIds"].toArray();
+    for(const auto& val : arr){
+        songsIds.push_back(val.toInt());
+    }
+    p.setSongIds(songsIds);
+    return p;
+}

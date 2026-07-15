@@ -2,7 +2,7 @@
 #include<stdexcept>
 #include<algorithm>
 
-ListenerRepository::ListenerRepository(PlaylistRepository& playlistRepo) : playlistRepo(playlistRepo){}
+ListenerRepository::ListenerRepository(PlaylistRepository& playlistRepo) : playlistRepo(playlistRepo){loadFromFile();}
 
 int ListenerRepository::save(const Account& item){
     if(!item.isListener()) throw std::invalid_argument("Invalid role for listener");
@@ -28,6 +28,7 @@ int ListenerRepository::save(const Account& item){
         Playlist favSongs(0,"Favorite Songs", newID);
         playlistRepo.save(favSongs);
     }
+    saveToFile();
     return newID;
 
 }
@@ -36,6 +37,7 @@ bool ListenerRepository::remove(int id){
     auto it = std::find_if(listeners.begin(), listeners.end(),[id](const Account& a){return a.getId()==id;} );
     if(it != listeners.end()){
         listeners.erase(it);
+        saveToFile();
         return true;
     }
     return false;
@@ -84,4 +86,38 @@ bool ListenerRepository::isLiked(int listenerId , int songId){
         }
     }
     return false;
+}
+
+void ListenerRepository::saveToFile(){
+    QJsonArray arr;
+    for(const auto& listener : listeners){
+        arr.append(listener.toJson());
+    }
+    QJsonDocument doc(arr);
+    QFile file("listeners.json");
+    if(file.open(QIODevice::WriteOnly)){
+        file.write(doc.toJson());
+        file.close();
+    }else{
+        throw std::runtime_error("File cant open");
+    }
+}
+
+void ListenerRepository::loadFromFile(){
+    QFile file("listeners.json");
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QJsonArray arr = doc.array();
+
+    listeners.clear();
+    for(const auto& val : arr){
+        QJsonObject obj = val.toObject();
+        listeners.push_back(Account::fromJson(obj));
+    }
 }

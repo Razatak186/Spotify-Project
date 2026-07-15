@@ -38,3 +38,32 @@ bool Album::hasSong(int songId) const{
 int Album::getSongCount() const{
     return songsIds.size();
 }
+
+QJsonObject Album::toJson() const{
+    QJsonObject obj;
+    obj["id"] = id;
+    obj["name"]= QString::fromStdString(name);
+    obj["artistId"] = artistId;
+
+    QJsonArray songsArray;
+    for(int id : songsIds){
+        songsArray.append(id);
+    }
+    obj["songsIds"] = songsArray;
+    return obj;
+
+}
+
+Album Album::fromJson(const QJsonObject& obj){
+    Album a;
+    a.setId(obj["id"].toInt());
+    a.setName(obj["name"].toString().toStdString());
+    a.setArtistId(obj["artistId"].toInt());
+    std::vector<int> songsIds;
+    const QJsonArray arr = obj["songsIds"].toArray();
+    for(const auto& val : arr){
+        songsIds.push_back(val.toInt());
+    }
+    a.setSongIds(songsIds);
+    return a;
+}

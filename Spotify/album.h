@@ -4,6 +4,8 @@
 #include"QImage"
 #include<vector>
 #include<string>
+#include<QJsonArray>
+#include<QJsonObject>
 class Album
 {
 private:
@@ -32,6 +34,9 @@ public:
     void removeSong(int songId);
     bool hasSong(int songId)const;
     int getSongCount()const;
+
+    QJsonObject toJson()const;
+    static Album fromJson(const QJsonObject& obj);
 };
 
 #endif // ALBUM_H

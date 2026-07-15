@@ -4,12 +4,18 @@
 #include "abstractrepository.h"
 #include "playlist.h"
 #include<vector>
+#include<QFile>
+#include<QJsonArray>
+#include<QJsonDocument>
 
 class PlaylistRepository : public  AbstractRepository<Playlist>
 {
 private:
     std::vector<Playlist> playlists;
+    void saveToFile();
+    void loadFromFile();
 public:
+    PlaylistRepository();
     int save(const Playlist& item) override;
     bool remove(int id) override;
     std::optional<Playlist> search(int id) override;

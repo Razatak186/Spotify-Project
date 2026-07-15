@@ -4,11 +4,17 @@
 #include<accountrepository.h>
 #include<playlistrepository.h>
 #include<vector>
+#include<QFile>
+#include<QJsonArray>
+#include<QJsonDocument>
+
 class ListenerRepository : public AccountRepository
 {
 private:
     std::vector<Account> listeners;
     PlaylistRepository& playlistRepo;
+    void saveToFile();
+    void loadFromFile();
 public:
     ListenerRepository(PlaylistRepository& playlistRepo);
 

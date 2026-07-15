@@ -1,6 +1,10 @@
 #include "playlistrepository.h"
 #include<algorithm>
 
+PlaylistRepository::PlaylistRepository(){
+    loadFromFile();
+}
+
 int PlaylistRepository::save(const Playlist& item){
     for(auto& playlist : playlists){
         if(playlist.getId()== item.getId()){
@@ -18,6 +22,7 @@ int PlaylistRepository::save(const Playlist& item){
     int newId= maxId+1;
     newPlaylist.setId(newId);
     playlists.push_back(newPlaylist);
+    saveToFile();
     return newId;
 }
 
@@ -25,6 +30,7 @@ bool PlaylistRepository::remove(int id){
     auto it = std::find_if(playlists.begin(),playlists.end(), [id](const Playlist& a){return a.getId() == id;});
     if(it!=playlists.end()){
         playlists.erase(it);
+        saveToFile();
         return true;
     }
     return false;
@@ -72,5 +78,40 @@ std::vector<Playlist> PlaylistRepository::playlist(int listenerId){
 void PlaylistRepository::removeSongFromAllPlaylists(int songId){
     for(auto& playlist : playlists){
         playlist.removeSong(songId);
+    }
+}
+
+void PlaylistRepository::saveToFile(){
+    QJsonArray arr;
+    for(const auto& playlist : playlists){
+        arr.append(playlist.toJson());
+    }
+
+    QJsonDocument doc(arr);
+    QFile file("playlists.json");
+    if(file.open(QIODevice::WriteOnly)){
+        file.write(doc.toJson());
+        file.close();
+    }else{
+        throw std::runtime_error("File cant open");
+    }
+
+}
+
+void PlaylistRepository::loadFromFile(){
+    QFile file("playlists.json");
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QJsonArray arr = doc.array();
+
+    for(const auto& val : arr){
+        QJsonObject obj = val.toObject();
+        playlists.push_back(Playlist::fromJson(obj));
     }
 }

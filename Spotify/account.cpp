@@ -26,3 +26,25 @@ void Account::setProfilePicture(const QImage& profilePicture) { this->profilePic
 
 bool Account::isArtist() const { return role == 1; }
 bool Account::isListener() const  { return role == 0; }
+
+QJsonObject Account::toJson() const{
+    QJsonObject obj;
+    obj["id"] =id;
+    obj["fullname"] = QString::fromStdString(fullname);
+    obj["username"] = QString::fromStdString(username);
+    obj["bio"] = QString::fromStdString(bio);
+    obj["password"] = QString::fromStdString(password);
+    obj["role"] = role;
+    return obj;
+}
+
+Account Account::fromJson(const QJsonObject& obj){
+    Account a;
+    a.setId(obj["id"].toInt());
+    a.setFullname(obj["fullname"].toString().toStdString());
+    a.setUsername(obj["username"].toString().toStdString());
+    a.setBio(obj["bio"].toString().toStdString());
+    a.setPassword(obj["password"].toString().toStdString());
+    a.setRole(obj["role"].toInt());
+    return a;
+}

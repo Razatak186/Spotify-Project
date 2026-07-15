@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include<QJsonArray>
+#include<QJsonObject>
 class Playlist
 {
 private:
@@ -30,6 +32,8 @@ public:
     bool hasSong(int songId)const;
     int getSongCount()const;
 
+    QJsonObject toJson()const;
+    static Playlist fromJson(const QJsonObject& obj);
 };
 
 #endif // PLAYLIST_H

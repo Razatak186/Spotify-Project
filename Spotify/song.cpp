@@ -25,3 +25,27 @@ void Song::setArtistId(int artistID){this->artistId = artistID;}
 void Song::setAlbumId(int albumId){this->albumId = albumId;}
 void Song::setFilePath(const std::string& path){this->filePath = path;}
 void Song::setSongImage(const QImage songImage){this->songImage = songImage;}
+
+QJsonObject Song::toJson()const{
+    QJsonObject obj;
+    obj["id"] = id;
+    obj["title"] = QString::fromStdString(title);
+    obj["genre"] = QString::fromStdString(genre);
+    obj["releaseYear"] = releaseYear;
+    obj["artistId"] = artistId;
+    obj["albumId"] = albumId;
+    obj["filePath"] = QString::fromStdString(filePath);
+    return obj;
+}
+
+Song Song::fromJson(const QJsonObject& obj){
+    Song s;
+    s.setId(obj["id"].toInt());
+    s.setTitle(obj["title"].toString().toStdString());
+    s.setGenre(obj["genre"].toString().toStdString());
+    s.setReleaseYear(obj["releaseYear"].toInt());
+    s.setArtistId(obj["artistId"].toInt());
+    s.setAlbumId(obj["albumId"].toInt());
+    s.setFilePath(obj["filePath"].toString().toStdString());
+    return s;
+}

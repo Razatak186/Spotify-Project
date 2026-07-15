@@ -2,6 +2,7 @@
 #define SONG_H
 #include"QImage"
 #include<string>
+#include<QJsonObject>
 class Song
 {
 private:
@@ -35,6 +36,9 @@ public:
     void setAlbumId(int albumId);
     void setFilePath(const std::string& path);
     void setSongImage(const QImage songImage);
+
+    QJsonObject toJson()const;
+    static Song fromJson(const QJsonObject& obj);
 };
 
 #endif // SONG_H

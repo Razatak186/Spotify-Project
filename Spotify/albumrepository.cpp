@@ -1,5 +1,10 @@
 #include "albumrepository.h"
 #include<algorithm>
+#include<stdexcept>
+
+AlbumRepository::AlbumRepository(){
+    loadFromFile();
+}
 
 int AlbumRepository::save(const Album& item){
     for(auto& album : albums){
@@ -18,6 +23,7 @@ int AlbumRepository::save(const Album& item){
     int newId= maxId+1;
     newAlbum.setId(newId);
     albums.push_back(newAlbum);
+    saveToFile();
     return newId;
 }
 
@@ -25,6 +31,7 @@ bool AlbumRepository::remove(int id){
     auto it = std::find_if(albums.begin(),albums.end(), [id](const Album& a){return a.getId() == id;});
     if(it!=albums.end()){
         albums.erase(it);
+        saveToFile();
         return true;
     }
     return false;
@@ -49,3 +56,36 @@ std::vector<Album> AlbumRepository::album(int artistId){
     return result;
 }
 
+void AlbumRepository::saveToFile(){
+    QJsonArray arr;
+    for(const auto& album : albums){
+        arr.append(album.toJson());
+    }
+    QJsonDocument doc(arr);
+    QFile file("albums.json");
+    if(file.open(QIODevice::WriteOnly)){
+        file.write(doc.toJson());
+        file.close();
+    }else{
+        throw std::runtime_error("File cant open");
+    }
+}
+
+void AlbumRepository::loadFromFile(){
+    QFile file("albums.json");
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QJsonArray arr = doc.array();
+
+    albums.clear();
+    for(const auto& val : arr){
+        QJsonObject obj = val.toObject();
+        albums.push_back(Album::fromJson(obj));
+    }
+}

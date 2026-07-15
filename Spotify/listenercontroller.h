@@ -40,7 +40,7 @@ public:
 
     void likeSong(int listenerId, int songId);
     void unlikeSong(int listenerId , int songId);
-    bool isLiked(int lsitenerId , int songId);
+    bool isLiked(int listenerId , int songId);
     std::vector<Song> getFavoriteSongs(int listenerId);
 
     std::vector<Song> searchSong(const std::string& query);
