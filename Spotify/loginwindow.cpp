@@ -1,0 +1,56 @@
+#include "loginwindow.h"
+#include "ui_loginwindow.h"
+#include<QMessageBox>
+LoginWindow::LoginWindow(AppController& AppController,QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::LoginWindow)
+    ,appCtrl(AppController)
+{
+    ui->setupUi(this);
+    connect(ui->loginButton, &QPushButton::clicked,this , &LoginWindow::onLoginClicked );
+    connect(ui->registerButton, &QPushButton::clicked, this , &LoginWindow::onRegisterClicked);
+    connect(ui->passwordEdit, &QLineEdit::returnPressed, this , &LoginWindow::onLoginClicked);
+    connect(ui->togglePasswordButton, &QPushButton::clicked, this , &LoginWindow::onTogglePasswordClicked);
+}
+
+LoginWindow::~LoginWindow()
+{
+    delete ui;
+}
+
+void LoginWindow::onLoginClicked(){
+    std::string username = ui->usernameEdit->text().toStdString();
+    std::string password = ui->passwordEdit->text().toStdString();
+    if(username == "" ){
+        ui->errorLabel->setText("Please enter a username.");
+        return;
+    }
+    if(password == ""){
+        ui->errorLabel->setText("Please enter a password.");
+        return;
+    }
+
+    try{
+        Account account = appCtrl.login(username , password);
+
+        ui->errorLabel->setText("");
+        QMessageBox::information(this , "Success", "Welcome "+ QString::fromStdString(account.getFullName())+"!");
+    }catch(const std::exception& e){
+        ui->errorLabel->setText(e.what());
+    }
+}
+
+void LoginWindow::onRegisterClicked()
+{
+    QMessageBox::information(this, "Info", "Register window coming soon!");
+}
+
+void LoginWindow::onTogglePasswordClicked(){
+    if(ui->passwordEdit->echoMode() == QLineEdit::Password){
+        ui->passwordEdit->setEchoMode(QLineEdit::Normal);
+        ui->togglePasswordButton->setText("Hide");
+    } else {
+        ui->passwordEdit->setEchoMode(QLineEdit::Password);
+        ui->togglePasswordButton->setText("Show");
+    }
+}

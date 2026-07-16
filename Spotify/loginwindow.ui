@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QWidget" name="LoginWindow">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#LoginWindow {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="title">
+       <property name="cursor">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="text">
+        <string>&lt;h1&gt;🎵 Spotify &lt;/h1&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="username">
+       <property name="frameShape">
+        <enum>QFrame::Shape::VLine</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="text">
+        <string>Username : </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="usernameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+QLineEdit:focus {
+    border: 2px solid #1DB954;
+}
+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="password">
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Password:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="togglePasswordButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    background-color: #3b3b3b;
+    color: white;
+    border: 2px solid #3b3b3b;
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-weight: bold;
+}
+QToolButton:hover {
+    background-color: #4a4a4a;
+    border: 2px solid #4a4a4a;
+}
+QToolButton:pressed {
+    background-color: #1DB954;
+    border: 2px solid #1DB954;
+}</string>
+       </property>
+       <property name="text">
+        <string>Show</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::WeatherStorm"/>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::ToolButtonPopupMode::DelayedPopup</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="passwordEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+QLineEdit:focus {
+    border: 2px solid #1DB954;
+}</string>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::EchoMode::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="errorLabel">
+       <property name="styleSheet">
+        <string notr="true">color: black;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="loginButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #1DB954;
+    color: white;
+	border: 2px solid #1DB954;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1ed760;
+}
+
+QPushButton:pressed {
+    background-color: #1aa34a;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Login</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="registerButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3b3b3b;
+    color: white;
+    border: 2px solid #1DB954;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #4a4a4a;
+}
+
+QPushButton:pressed {
+    background-color: #2a2a2a;
+}</string>
+       </property>
+       <property name="text">
+        <string>Register</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
