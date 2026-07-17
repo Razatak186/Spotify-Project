@@ -6,13 +6,516 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>500</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#RegisterWindow {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="title">
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="text">
+        <string>&lt;h1&gt;🎵 Create Account &lt;/h1&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="fullnameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+	color:black;
+}
+QLineEdit:focus {
+    border: 2px solid #1DB954;
+}
+
+QLineEdit::placeholder {
+    color: #888888;        
+    font-weight: normal;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Fullname:*</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="usernameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+	color:black;
+}
+QLineEdit:focus {
+    border: 2px solid #1DB954;
+}
+
+QLineEdit::placeholder {
+    color: #888888;        
+    font-weight: normal;
+}
+</string>
+       </property>
+       <property name="placeholderText">
+        <string>Username :*</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>2</y>
+          <width>471</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLineEdit" name="passwordEdit">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit {
+
+    background-color: white;
+
+    border: 2px solid #cccccc;
+
+    border-radius: 15px;
+
+    padding: 8px 12px;
+
+    font-size: 14px;
+
+	color:black;
+
+}
+
+QLineEdit:focus {
+
+    border: 2px solid #1DB954;
+
+}
+
+QLineEdit QToolButton {
+
+    background-color: #3b3b3b;
+
+    color: white;
+
+    border: 2px solid #3b3b3b;
+
+    border-radius: 12px;
+
+    padding: 4px 10px;
+
+    font-weight: bold;
+
+    margin-right: 4px;
+
+}
+
+QLineEdit QToolButton:hover {
+
+    background-color: #4a4a4a;
+
+    border: 2px solid #4a4a4a;
+
+}
+
+QLineEdit QToolButton:pressed {
+
+    background-color: #1DB954;
+
+    border: 2px solid #1DB954;
+
+}
+
+QLineEdit::placeholder {
+
+    color: #888888;        
+
+    font-weight: normal;
+
+}</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Password:*</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="togglePasswordButton">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton {
+    background-color: #3b3b3b;
+    color: white;
+    border: 2px solid #1DB954;
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-weight: bold;
+}
+QToolButton:hover {
+    background-color: #4a4a4a;
+}
+QToolButton:pressed {
+    background-color: #1DB954;
+    color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Show</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="roleGBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox {
+    background-color: rgba(255, 255, 255, 30);
+    border: 2px solid rgba(255, 255, 255, 100);
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px 10px 10px 10px;
+    font-weight: bold;
+    color: white;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 10px;
+    color: white;
+}</string>
+       </property>
+       <property name="title">
+        <string>Role :</string>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>20</y>
+          <width>461</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QRadioButton" name="artistRadio">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QRadioButton {
+    color: white;
+    font-size: 14px;
+    spacing: 8px;
+}
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: 2px solid white;
+    background-color: transparent;
+}
+QRadioButton::indicator:checked {
+    background-color: #1DB954;
+    border: 2px solid #1DB954;
+}
+QRadioButton::indicator:hover {
+    border: 2px solid #1ed760;
+}</string>
+           </property>
+           <property name="text">
+            <string>Artist</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="listenerRadio">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QRadioButton {
+    color: white;
+    font-size: 14px;
+    spacing: 8px;
+}
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: 2px solid white;
+    background-color: transparent;
+}
+QRadioButton::indicator:checked {
+    background-color: #1DB954;
+    border: 2px solid #1DB954;
+}
+QRadioButton::indicator:hover {
+    border: 2px solid #1ed760;
+}</string>
+           </property>
+           <property name="text">
+            <string>Listener</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="bio">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="cursor" stdset="0">
+        <cursorShape>IBeamCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+	color:black;
+}
+QTextEdit:focus {
+    border: 2px solid #1DB954;
+}
+
+QTextEdit::placeholder {
+    color: #888888;        
+    font-weight: normal;
+}</string>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:14px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-weight:200;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="placeholderText">
+        <string>Bio :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="errorLabel">
+       <property name="styleSheet">
+        <string notr="true">color:white</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>30</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #3b3b3b;
+    color: white;
+    border: 2px solid #1DB954;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #4a4a4a;
+}
+
+QPushButton:pressed {
+    background-color: #2a2a2a;
+}</string>
+        </property>
+        <property name="text">
+         <string>Back To Login</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="registerButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #1DB954;
+    color: white;
+	border: 2px solid #1DB954;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1ed760;
+}
+
+QPushButton:pressed {
+    background-color: #1aa34a;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Register</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

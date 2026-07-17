@@ -48,17 +48,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="username">
-       <property name="frameShape">
-        <enum>QFrame::Shape::VLine</enum>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
-       <property name="frameShadow">
-        <enum>QFrame::Shadow::Sunken</enum>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-       <property name="text">
-        <string>Username : </string>
-       </property>
-      </widget>
+      </spacer>
      </item>
      <item>
       <widget class="QLineEdit" name="usernameEdit">
@@ -69,88 +69,123 @@
     border-radius: 15px;
     padding: 8px 12px;
     font-size: 14px;
+	color:black;
 }
 QLineEdit:focus {
     border: 2px solid #1DB954;
 }
-</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="password">
-       <property name="frameShape">
-        <enum>QFrame::Shape::NoFrame</enum>
-       </property>
-       <property name="text">
-        <string>Password:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="togglePasswordButton">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QToolButton {
-    background-color: #3b3b3b;
-    color: white;
-    border: 2px solid #3b3b3b;
-    border-radius: 15px;
-    padding: 6px 12px;
-    font-weight: bold;
-}
-QToolButton:hover {
-    background-color: #4a4a4a;
-    border: 2px solid #4a4a4a;
-}
-QToolButton:pressed {
-    background-color: #1DB954;
-    border: 2px solid #1DB954;
+
+QLineEdit::placeholder {
+    color: #888888;       
+    font-weight: normal;
 }</string>
        </property>
-       <property name="text">
-        <string>Show</string>
-       </property>
-       <property name="icon">
-        <iconset theme="QIcon::ThemeIcon::WeatherStorm"/>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::ToolButtonPopupMode::DelayedPopup</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="passwordEdit">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
-    background-color: white;
-    border: 2px solid #cccccc;
-    border-radius: 15px;
-    padding: 8px 12px;
-    font-size: 14px;
-}
-QLineEdit:focus {
-    border: 2px solid #1DB954;
-}</string>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::EchoMode::Password</enum>
+       <property name="placeholderText">
+        <string>Username:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="errorLabel">
        <property name="styleSheet">
-        <string notr="true">color: black;</string>
+        <string notr="true">color: white;</string>
        </property>
        <property name="text">
         <string/>
        </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>-1</y>
+          <width>471</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="passwordEdit">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit {
+
+    background-color: white;
+
+    border: 2px solid #cccccc;
+
+    border-radius: 15px;
+
+    padding: 8px 12px;
+
+    font-size: 14px;
+
+	color:black;
+
+}
+
+QLineEdit:focus {
+
+    border: 2px solid #1DB954;
+
+}
+
+QLineEdit::placeholder {
+
+    color: #888888;        
+
+    font-weight: normal;
+
+}</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Password:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="togglePasswordButton">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QToolButton {
+    background-color: #3b3b3b;
+    color: white;
+    border: 2px solid #1DB954;
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-weight: bold;
+}
+QToolButton:hover {
+    background-color: #4a4a4a;
+}
+QToolButton:pressed {
+    background-color: #1DB954;
+    color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Show</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>

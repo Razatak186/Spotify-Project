@@ -13,6 +13,7 @@ SOURCES += \
     appcontroller.cpp \
     artistcontroller.cpp \
     artistrepository.cpp \
+    artistwindow.cpp \
     listenercontroller.cpp \
     listenerrepository.cpp \
     loginwindow.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     appcontroller.h \
     artistcontroller.h \
     artistrepository.h \
+    artistwindow.h \
     listenercontroller.h \
     listenerrepository.h \
     loginwindow.h \
@@ -46,6 +48,7 @@ HEADERS += \
     sorthelper.h
 
 FORMS += \
+    artistwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     registerwindow.ui

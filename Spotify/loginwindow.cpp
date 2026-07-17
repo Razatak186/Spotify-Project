@@ -1,6 +1,8 @@
 #include "loginwindow.h"
+#include "registerwindow.h"
 #include "ui_loginwindow.h"
 #include<QMessageBox>
+#include<QDebug>
 LoginWindow::LoginWindow(AppController& AppController,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginWindow)
@@ -42,7 +44,10 @@ void LoginWindow::onLoginClicked(){
 
 void LoginWindow::onRegisterClicked()
 {
-    QMessageBox::information(this, "Info", "Register window coming soon!");
+    RegisterWindow registerWin(appCtrl,this);
+    registerWin.setModal(true);
+    registerWin.exec();
+
 }
 
 void LoginWindow::onTogglePasswordClicked(){
