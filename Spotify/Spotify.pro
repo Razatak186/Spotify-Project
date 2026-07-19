@@ -8,12 +8,17 @@ CONFIG += c++17
 
 SOURCES += \
     account.cpp \
+    addalbumdialog.cpp \
+    addsongdialog.cpp \
     album.cpp \
     albumrepository.cpp \
     appcontroller.cpp \
     artistcontroller.cpp \
     artistrepository.cpp \
     artistwindow.cpp \
+    editalbumdialog.cpp \
+    editprofiledialog.cpp \
+    editsongdialog.cpp \
     listenercontroller.cpp \
     listenerrepository.cpp \
     loginwindow.cpp \
@@ -30,12 +35,17 @@ HEADERS += \
     abstractrepository.h \
     account.h \
     accountrepository.h \
+    addalbumdialog.h \
+    addsongdialog.h \
     album.h \
     albumrepository.h \
     appcontroller.h \
     artistcontroller.h \
     artistrepository.h \
     artistwindow.h \
+    editalbumdialog.h \
+    editprofiledialog.h \
+    editsongdialog.h \
     listenercontroller.h \
     listenerrepository.h \
     loginwindow.h \
@@ -48,7 +58,12 @@ HEADERS += \
     sorthelper.h
 
 FORMS += \
+    addalbumdialog.ui \
+    addsongdialog.ui \
     artistwindow.ui \
+    editalbumdialog.ui \
+    editprofiledialog.ui \
+    editsongdialog.ui \
     loginwindow.ui \
     mainwindow.ui \
     registerwindow.ui

@@ -3,10 +3,15 @@
 #include "ui_loginwindow.h"
 #include<QMessageBox>
 #include<QDebug>
-LoginWindow::LoginWindow(AppController& AppController,QWidget *parent)
+LoginWindow::LoginWindow(AppController& AppController,ArtistController& artistController,ListenerController& listenerController,PlaylistRepository& playlistRepo , SongRepository& songRepo,AlbumRepository& albumRepo,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginWindow)
     ,appCtrl(AppController)
+    ,artistCtrl(artistController)
+    ,listenerCtrl(listenerController)
+    ,playlistRepo(playlistRepo)
+    ,songRepo(songRepo)
+    ,albumRepo(albumRepo)
 {
     ui->setupUi(this);
     connect(ui->loginButton, &QPushButton::clicked,this , &LoginWindow::onLoginClicked );
@@ -36,7 +41,16 @@ void LoginWindow::onLoginClicked(){
         Account account = appCtrl.login(username , password);
 
         ui->errorLabel->setText("");
-        QMessageBox::information(this , "Success", "Welcome "+ QString::fromStdString(account.getFullName())+"!");
+
+        if(account.isArtist()){
+            ArtistWindow* artistWin = new ArtistWindow(account.getId(), artistCtrl,appCtrl, nullptr);
+            artistWin->setAttribute(Qt::WA_DeleteOnClose);
+            artistWin->show();
+            this->hide();
+        }else{
+              QMessageBox::information(this, "Info", "Listener window coming soon!");
+        }
+
     }catch(const std::exception& e){
         ui->errorLabel->setText(e.what());
     }

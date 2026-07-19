@@ -44,7 +44,7 @@ void RegisterWindow::onRegisterClicked(){
     }
 
     try{
-        appCtrl.registeration(fullname , username,password,role);
+        appCtrl.registeration(fullname , username,password,role,bio);
 
         ui->errorLabel->setText("");
         QMessageBox::information(this, "Success", "Account created successfully!");

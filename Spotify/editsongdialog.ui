@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditSongDialog</class>
+ <widget class="QDialog" name="EditSongDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#EditSongDialog {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="titleLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#titleLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>✏️ Edit Song</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="titleEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#titleEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#titleEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#titleEdit::placeholder {
+    color: #95a5a6;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Title:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="genreEdit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit#genreEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#genreEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#genreEdit::placeholder {
+    color: #95a5a6;
+}</string>
+         </property>
+         <property name="placeholderText">
+          <string>Genre:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="yearLabel">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}</string>
+         </property>
+         <property name="text">
+          <string>ReleaseYear:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="yearSpin">
+         <property name="styleSheet">
+          <string notr="true">QSpinBox#yearSpin {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #2c3e50;
+    min-height: 35px;
+}
+QSpinBox#yearSpin:focus {
+    border: 2px solid #1DB954;
+}
+QSpinBox#yearSpin::up-button, QSpinBox#yearSpin::down-button {
+    width: 20px;
+    border-radius: 8px;
+    background-color: #1DB954;
+    color: white;
+}
+QSpinBox#yearSpin::up-button:hover, QSpinBox#yearSpin::down-button:hover {
+    background-color: #1ed760;
+}</string>
+         </property>
+         <property name="minimum">
+          <number>1900</number>
+         </property>
+         <property name="maximum">
+          <number>2030</number>
+         </property>
+         <property name="value">
+          <number>2026</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLineEdit" name="fileEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#fileEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#fileEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#fileEdit::placeholder {
+    color: #95a5a6;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>File path:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="browseButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton#browseButton {
+    background-color: rgba(52, 73, 94, 0.9);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 12px;
+    min-width: 70px;
+}
+QPushButton#browseButton:hover {
+    background-color: rgba(52, 73, 94, 1.0);
+}
+QPushButton#browseButton:pressed {
+    background-color: rgba(44, 62, 80, 1.0);
+}</string>
+       </property>
+       <property name="text">
+        <string>Browse...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton#okButton {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 80px;
+}
+QPushButton#okButton:hover {
+    background-color: #1ed760;
+}
+QPushButton#okButton:pressed {
+    background-color: #1aa34a;
+}</string>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton#cancelButton {
+    background-color: rgba(231, 76, 60, 0.85);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 80px;
+}
+QPushButton#cancelButton:hover {
+    background-color: rgba(231, 76, 60, 1.0);
+}
+QPushButton#cancelButton:pressed {
+    background-color: rgba(192, 57, 43, 1.0);
+}</string>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

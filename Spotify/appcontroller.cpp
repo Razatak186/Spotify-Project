@@ -2,7 +2,7 @@
 
 AppController::AppController(ArtistRepository& artistRepo , ListenerRepository& listenerRepo) : artist(artistRepo), listener(listenerRepo){}
 
-void AppController::registeration(std::string fullName , std::string userName , std::string password , int role){
+void AppController::registeration(std::string fullName , std::string userName , std::string password , int role, std::string bio){
     std::optional<Account> result = artist.searchByUserName(userName);
     if(result.has_value()){
         throw std::runtime_error("The username is already exist.");
@@ -15,6 +15,7 @@ void AppController::registeration(std::string fullName , std::string userName , 
     }
 
     Account newAccount(0,fullName,userName,password,role);
+    newAccount.setBio(bio);
     if(role ==1){
         artist.save(newAccount);
     }else if(role==0){
@@ -103,4 +104,12 @@ void AppController::deleteAccount(int accountid, bool isArtist){
         listener.remove(accountid);
     }
 
+}
+
+std::optional<Account> AppController::getAccount(int accountId , bool isArtist){
+    if(isArtist){
+        return artist.search(accountId);
+    }else{
+        return listener.search(accountId);
+    }
 }

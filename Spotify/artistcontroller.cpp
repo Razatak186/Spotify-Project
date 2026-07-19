@@ -200,3 +200,12 @@ std::vector<Song> ArtistController::filterByGenre(int artistId , const std::stri
 std::vector<Song> ArtistController::filterByYear(int artistId, int year){
     return SortHelper::filterByYear(getAllSongs(artistId), year);
 }
+
+std::optional<Album> ArtistController::getAlbumById(int albumId){
+    return albumRepo.search(albumId);
+}
+
+std::optional<Song> ArtistController::getSongById(int songId)
+{
+    return songRepo.search(songId);
+}

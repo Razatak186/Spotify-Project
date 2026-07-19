@@ -39,7 +39,8 @@ public:
     std::vector<Song> searchSong(int artistId , const std::string& query);
     std::vector<Song> filterByGenre(int artistId, const std::string& genre);
     std::vector<Song> filterByYear(int artistId , int year);
-
+    std::optional<Album> getAlbumById(int albumId);
+    std::optional<Song> getSongById(int songId);
 };
 
 #endif // ARTISTCONTROLLER_H

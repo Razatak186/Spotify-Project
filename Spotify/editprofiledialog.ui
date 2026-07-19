@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditProfileDialog</class>
+ <widget class="QDialog" name="EditProfileDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#EditProfileDialog {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="titleLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#titleLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>✏️ Edit Profile</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="fullNameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#fullNameEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#fullNameEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#fullNameEdit::placeholder {
+    color: #95a5a6;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Full Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="usernameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#usernameEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#usernameEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#usernameEdit::placeholder {
+    color: #95a5a6;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Username:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="passwordEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#passwordEdit {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+QLineEdit#passwordEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#passwordEdit::placeholder {
+    color: #95a5a6;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Password:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="saveButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#saveButton {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+QPushButton#saveButton:hover {
+    background-color: #1ed760;
+}
+QPushButton#saveButton:pressed {
+    background-color: #1aa34a;
+}
+</string>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancelButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#cancelButton {
+    background-color: rgba(231, 76, 60, 0.85);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 80px;
+}
+QPushButton#cancelButton:hover {
+    background-color: rgba(231, 76, 60, 1.0);
+}
+QPushButton#cancelButton:pressed {
+    background-color: rgba(192, 57, 43, 1.0);
+}</string>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
