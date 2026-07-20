@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ArtistWindow</class>
- <widget class="QWidget" name="ArtistWindow">
+ <class>ListenerWindow</class>
+ <widget class="QWidget" name="ListenerWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
+    <width>715</width>
     <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="welcomeLabel">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="text">
-          <string>👋 Welcome, Artist!</string>
+          <string>👋 Welcome, Listener!</string>
          </property>
         </widget>
        </item>
@@ -46,18 +40,6 @@
        </item>
        <item>
         <widget class="QPushButton" name="darkModeButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="text">
           <string>🌙 Dark</string>
          </property>
@@ -78,19 +60,13 @@
        </item>
        <item>
         <widget class="QPushButton" name="logoutButton">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="text">
           <string>🚪 Logout</string>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_4">
+        <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
          </property>
@@ -110,7 +86,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_3">
+        <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
          </property>
@@ -132,7 +108,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLineEdit" name="searchEdit">
          <property name="placeholderText">
@@ -156,101 +132,108 @@
       </layout>
      </item>
      <item>
-      <widget class="QTabWidget" name="mainTabs">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
+      <widget class="QTabWidget" name="mainTab">
+       <property name="enabled">
+        <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
-       <widget class="QWidget" name="Albums">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
+       <widget class="QWidget" name="Playlists">
         <attribute name="title">
-         <string>Albums</string>
+         <string>Playlists</string>
         </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QListWidget" name="listWidget">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
+          <widget class="QListWidget" name="playlistList"/>
+         </item>
+         <item>
+          <widget class="QListWidget" name="playlistSongsList"/>
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="Singles">
+       <widget class="QWidget" name="Artists">
         <attribute name="title">
-         <string>Songs</string>
+         <string>Artists</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QListWidget" name="artistList"/>
+         </item>
+         <item>
+          <widget class="QListWidget" name="albumList"/>
+         </item>
+         <item>
+          <widget class="QListWidget" name="songList"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="Favorites">
+        <attribute name="title">
+         <string>Favorites</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QListWidget" name="listWidget_2">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="Songs">
-        <attribute name="title">
-         <string>Singles</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QListWidget" name="listWidget_3">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
+          <widget class="QListWidget" name="favoriteList"/>
          </item>
         </layout>
        </widget>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_13">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="QPushButton" name="addButton">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
+         <property name="text">
+          <string>➕ Add Playlist</string>
          </property>
-         <property name="styleSheet">
-          <string notr="true"/>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addToPlaylistButton">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
          <property name="text">
-          <string>➕ Add</string>
+          <string>📋Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="removeFromPlaylistButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>❌Remove </string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="editButton">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="text">
-          <string>✏️ Edit</string>
+          <string>✏️ Edit Playlist</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="deleteButton">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="text">
-          <string>🗑️ Delete</string>
+          <string>🗑️ Delete Playlist</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="likeButton">
+         <property name="text">
+          <string>❤️ Like</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="unlikeButton">
+         <property name="text">
+          <string>💔 Unlike</string>
          </property>
         </widget>
        </item>

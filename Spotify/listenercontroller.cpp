@@ -133,3 +133,11 @@ std::vector<Song> ListenerController::filterByGenre(const std::string& genre){
 std::vector<Song> ListenerController::filterByYear(int year){
     return SortHelper::filterByYear(songRepo.getAll() , year);
 }
+
+std::optional<Playlist> ListenerController::getPlaylistById(int playlistId){
+    return playlistRepo.search(playlistId);
+}
+
+std::vector<Song> ListenerController::getSingleSongs(int artistId){
+    return songRepo.singleSongs(artistId);
+}

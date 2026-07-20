@@ -1,13 +1,13 @@
-#ifndef ARTISTWINDOW_H
-#define ARTISTWINDOW_H
+#ifndef LISTENERWINDOW_H
+#define LISTENERWINDOW_H
 
 #include "appcontroller.h"
-#include "artistcontroller.h"
+#include "listenercontroller.h"
+#include "qlistwidget.h"
 #include <QWidget>
-#include<QListWidget>
-#include<addalbumdialog.h>
-inline const QString LIGHT_STYLE = R"(
-QWidget#ArtistWindow {
+
+inline const QString LIGHT_STYLES = R"(
+QWidget#ListenerWindow {
     background-color: qlineargradient(
         x1: 0, y1: 0, x2: 1, y2: 1,
         stop: 0 #1DB954,
@@ -37,6 +37,29 @@ QPushButton#darkModeButton:hover {
 }
 QPushButton#darkModeButton:pressed {
     background-color: rgba(0, 0, 0, 0.55);
+}
+
+QPushButton#removeFromPlaylistButton {
+    background-color: #e67e22;
+    color: white;
+    border: 2px solid #ca6f1e;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#removeFromPlaylistButton:hover {
+    background-color: #eb984e;
+    border: 2px solid #e67e22;
+}
+QPushButton#removeFromPlaylistButton:pressed {
+    background-color: #ca6f1e;
+    border: 2px solid #a04000;
+}
+QPushButton#removeFromPlaylistButton:disabled {
+    background-color: rgba(230, 126, 34, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(230, 126, 34, 0.2);
 }
 
 QPushButton#logoutButton {
@@ -112,57 +135,6 @@ QListWidget::item:selected:hover {
     border: 1px solid #1DB954;
 }
 
-QPushButton#addButton {
-    background-color: rgba(29, 185, 84, 0.9);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#addButton:hover {
-    background-color: rgba(46, 219, 106, 1.0);
-    border: 2px solid white;
-}
-QPushButton#addButton:pressed {
-    background-color: rgba(21, 138, 62, 1.0);
-}
-
-QPushButton#editButton {
-    background-color: rgba(243, 156, 18, 0.9);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#editButton:hover {
-    background-color: rgba(245, 176, 65, 1.0);
-    border: 2px solid white;
-}
-QPushButton#editButton:pressed {
-    background-color: rgba(214, 137, 16, 1.0);
-}
-
-QPushButton#deleteButton {
-    background-color: rgba(231, 76, 60, 0.9);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#deleteButton:hover {
-    background-color: rgba(236, 112, 99, 1.0);
-    border: 2px solid white;
-}
-QPushButton#deleteButton:pressed {
-    background-color: rgba(192, 57, 43, 1.0);
-}
-
 QLineEdit#searchEdit {
     background-color: rgba(255, 255, 255, 0.9);
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -226,6 +198,120 @@ QComboBox QAbstractItemView {
     selection-color: white;
 }
 
+QPushButton#addButton {
+    background-color: rgba(29, 185, 84, 0.9);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#addButton:hover {
+    background-color: rgba(46, 219, 106, 1.0);
+    border: 2px solid white;
+}
+QPushButton#addButton:pressed {
+    background-color: rgba(21, 138, 62, 1.0);
+}
+
+QPushButton#editButton {
+    background-color: rgba(243, 156, 18, 0.9);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#editButton:hover {
+    background-color: rgba(245, 176, 65, 1.0);
+    border: 2px solid white;
+}
+QPushButton#editButton:pressed {
+    background-color: rgba(214, 137, 16, 1.0);
+}
+
+QPushButton#deleteButton {
+    background-color: rgba(231, 76, 60, 0.9);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#deleteButton:hover {
+    background-color: rgba(236, 112, 99, 1.0);
+    border: 2px solid white;
+}
+QPushButton#deleteButton:pressed {
+    background-color: rgba(192, 57, 43, 1.0);
+}
+
+QPushButton#likeButton {
+    background-color: #e74c3c;
+    color: white;
+    border: 2px solid #c0392b;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#likeButton:hover {
+    background-color: #ec7063;
+    border: 2px solid #e74c3c;
+}
+QPushButton#likeButton:pressed {
+    background-color: #c0392b;
+    border: 2px solid #922b21;
+}
+QPushButton#likeButton:disabled {
+    background-color: rgba(231, 76, 60, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(231, 76, 60, 0.2);
+}
+
+QPushButton#unlikeButton {
+    background-color: #34495e;
+    color: white;
+    border: 2px solid #2c3e50;
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#unlikeButton:hover {
+    background-color: #5d6d7e;
+    border: 2px solid #34495e;
+}
+QPushButton#unlikeButton:pressed {
+    background-color: #2c3e50;
+    border: 2px solid #1a252f;
+}
+QPushButton#unlikeButton:disabled {
+    background-color: rgba(52, 73, 94, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(52, 73, 94, 0.2);
+}
+
+QPushButton#addToPlaylistButton {
+    background-color: rgba(155, 89, 182, 0.85);
+    color: white;
+    border: 2px solid rgba(155, 89, 182, 0.5);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#addToPlaylistButton:hover {
+    background-color: rgba(155, 89, 182, 1.0);
+}
+QPushButton#addToPlaylistButton:disabled {
+    background-color: rgba(155, 89, 182, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+}
+
 QPushButton#editProfileButton {
     background-color: rgba(52, 152, 219, 0.85);
     color: white;
@@ -258,13 +344,9 @@ QPushButton#deleteProfileButton:hover {
 QPushButton#deleteProfileButton:pressed {
     background-color: rgba(192, 57, 43, 1.0);
 }
-
-
-
 )";
 
-inline const QString DARK_STYLE= R"(
-
+inline const QString DARK_STYLES = R"(
 QLineEdit#searchEdit {
     background-color: rgba(255, 255, 255, 0.12);
     border: 2px solid rgba(255, 255, 255, 0.15);
@@ -345,8 +427,123 @@ QPushButton#deleteProfileButton:hover {
     border: 2px solid #e74c3c;
 }
 
+QPushButton#addButton {
+    background: rgba(29, 185, 84, 0.7);
+    color: white;
+    border: 2px solid rgba(29, 185, 84, 0.4);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#addButton:hover {
+    background: rgba(29, 185, 84, 0.9);
+    border: 2px solid rgba(29, 185, 84, 0.8);
+}
 
-QWidget#ArtistWindow {
+QPushButton#editButton {
+    background: rgba(243, 156, 18, 0.6);
+    color: white;
+    border: 2px solid rgba(243, 156, 18, 0.3);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#editButton:hover {
+    background: rgba(243, 156, 18, 0.85);
+    border: 2px solid rgba(243, 156, 18, 0.7);
+}
+
+QPushButton#deleteButton {
+    background: rgba(231, 76, 60, 0.6);
+    color: white;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#deleteButton:hover {
+    background: rgba(231, 76, 60, 0.85);
+    border: 2px solid rgba(231, 76, 60, 0.7);
+}
+
+QPushButton#likeButton {
+    background-color: rgba(231, 76, 60, 0.7);
+    color: white;
+    border: 2px solid rgba(231, 76, 60, 0.4);
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#likeButton:hover {
+    background-color: rgba(231, 76, 60, 0.9);
+    border: 2px solid #e74c3c;
+}
+QPushButton#likeButton:disabled {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(231, 76, 60, 0.15);
+}
+
+QPushButton#unlikeButton {
+    background-color: rgba(52, 73, 94, 0.7);
+    color: white;
+    border: 2px solid rgba(52, 73, 94, 0.4);
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#unlikeButton:hover {
+    background-color: rgba(52, 73, 94, 0.9);
+    border: 2px solid #5d6d7e;
+}
+QPushButton#unlikeButton:disabled {
+    background-color: rgba(52, 73, 94, 0.2);
+    color: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(52, 73, 94, 0.15);
+}
+
+QPushButton#removeFromPlaylistButton {
+    background-color: rgba(230, 126, 34, 0.7);
+    color: white;
+    border: 2px solid rgba(230, 126, 34, 0.4);
+    border-radius: 18px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#removeFromPlaylistButton:hover {
+    background-color: rgba(230, 126, 34, 0.9);
+    border: 2px solid #e67e22;
+}
+QPushButton#removeFromPlaylistButton:disabled {
+    background-color: rgba(230, 126, 34, 0.2);
+    color: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(230, 126, 34, 0.15);
+}
+
+QPushButton#addToPlaylistButton {
+    background: rgba(155, 89, 182, 0.6);
+    color: white;
+    border: 2px solid rgba(155, 89, 182, 0.3);
+    border-radius: 18px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 13px;
+}
+QPushButton#addToPlaylistButton:hover {
+    background: rgba(155, 89, 182, 0.85);
+}
+QPushButton#addToPlaylistButton:disabled {
+    background: rgba(155, 89, 182, 0.2);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+QWidget#ListenerWindow {
     background: qlineargradient(
         x1: 0, y1: 0, x2: 1, y2: 1,
         stop: 0 #0a0f0a,
@@ -446,88 +643,67 @@ QListWidget::item:selected:hover {
     background: rgba(29, 185, 84, 0.5);
     border: 1px solid #1DB954;
 }
-
-QPushButton#addButton {
-    background: rgba(29, 185, 84, 0.7);
-    color: white;
-    border: 2px solid rgba(29, 185, 84, 0.4);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#addButton:hover {
-    background: rgba(29, 185, 84, 0.9);
-    border: 2px solid rgba(29, 185, 84, 0.8);
-}
-
-QPushButton#editButton {
-    background: rgba(243, 156, 18, 0.6);
-    color: white;
-    border: 2px solid rgba(243, 156, 18, 0.3);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#editButton:hover {
-    background: rgba(243, 156, 18, 0.85);
-    border: 2px solid rgba(243, 156, 18, 0.7);
-}
-
-QPushButton#deleteButton {
-    background: rgba(231, 76, 60, 0.6);
-    color: white;
-    border: 2px solid rgba(231, 76, 60, 0.3);
-    border-radius: 18px;
-    padding: 12px 28px;
-    font-weight: bold;
-    font-size: 13px;
-}
-QPushButton#deleteButton:hover {
-    background: rgba(231, 76, 60, 0.85);
-    border: 2px solid rgba(231, 76, 60, 0.7);
-}
 )";
 
 namespace Ui {
-class ArtistWindow;
+class ListenerWindow;
 }
 
-class ArtistWindow : public QWidget
+class ListenerWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ArtistWindow(int artistId,ArtistController& controller,AppController& appController,QWidget *parent = nullptr);
-    ~ArtistWindow();
-private slots :
-    void onAddClicked();
-    void onEditClicked();
-    void onDeleteClicked();
-    void onLogoutClicked();
-    void onDarkModeClicked();
-    void onTabChanged(int index);
+    explicit ListenerWindow(int listenerId ,ListenerController& controller,AppController& appController,QWidget *parent = nullptr);
+    ~ListenerWindow();
+private slots:
+    void onAddPlaylistClicked();
+    void onEditPlaylistClicked();
+    void onDeletePlaylistClicked();
+
+    void onLikeClicked();
+    void onUnlikeClicked();
+    void onAddToPlaylistClicked();
+
     void onSearchClicked();
-    void onFilterTypechanged();
-    void onFilterValuechanged();
+    void onFilterTypeChanged();
+    void onFilterValueChanged();
+
+    void onTabChanged(int index);
+
+    void onArtistClicked(QListWidgetItem* item);
+    void onAlbumClicked(QListWidgetItem* item);
+    void onSongClicked(QListWidgetItem* item);
+
     void onEditProfileClicked();
     void onDeleteProfileClicked();
+    void onLogoutClicked();
+
+    void onDarkModeClicked();
+
+    void onPlaylistClicked(QListWidgetItem* item);
+    void onRemoveFromPlaylistClicked();
+    void onPlaylistSongsClicked(QListWidgetItem* item);
+
 private:
-    Ui::ArtistWindow *ui;
-    ArtistController& artistCtrl;
+    Ui::ListenerWindow *ui;
+    ListenerController& listenerCtrl;
     AppController& appCtrl;
-    int currentArtsitId;
+    int currentListenerId;
     bool isDarkMode;
 
-    void loadAlbums();
+    void loadPlaylists();
+    void loadArtists();
+    void loadAlbums(int artistId);
     void loadSongs(int albumId);
-    void loadSingles();
+    void loadFavorites();
     void refreshAll();
-    void  applyTheme();
+
+    void applyTheme();
+    void applyCurrentFilter();
     int getCurrentTab();
     int getSelectedItemId(QListWidget* list);
-    void applyCurrentFilter();
+    void updateActionButtons();
 };
 
-#endif // ARTISTWINDOW_H
+#endif // LISTENERWINDOW_H

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SelectPlaylistDialog</class>
+ <widget class="QDialog" name="SelectPlaylistDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#SelectPlaylistDialog {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="titleLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#titleLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>📋 Select Playlist</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="playlistList">
+       <property name="styleSheet">
+        <string notr="true">QListWidget#playlistList {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+}
+QListWidget#playlistList::item {
+    color: white;
+    padding: 12px 18px;
+    margin: 4px 6px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+QListWidget#playlistList::item:selected {
+    background-color: rgba(29, 185, 84, 0.5);
+    border: 1px solid #1DB954;
+    color: white;
+}
+QListWidget#playlistList::item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="addButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#addButton {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 80px;
+}
+QPushButton#addButton:hover {
+    background-color: #1ed760;
+}
+QPushButton#addButton:pressed {
+    background-color: #1aa34a;
+}</string>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancelButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#cancelButton {
+    background-color: rgba(231, 76, 60, 0.85);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 80px;
+}
+QPushButton#cancelButton:hover {
+    background-color: rgba(231, 76, 60, 1.0);
+}
+QPushButton#cancelButton:pressed {
+    background-color: rgba(192, 57, 43, 1.0);
+}</string>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

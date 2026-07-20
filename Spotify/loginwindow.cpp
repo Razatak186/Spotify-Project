@@ -3,6 +3,8 @@
 #include "ui_loginwindow.h"
 #include<QMessageBox>
 #include<QDebug>
+#include<listenerwindow.h>
+
 LoginWindow::LoginWindow(AppController& AppController,ArtistController& artistController,ListenerController& listenerController,PlaylistRepository& playlistRepo , SongRepository& songRepo,AlbumRepository& albumRepo,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginWindow)
@@ -48,7 +50,14 @@ void LoginWindow::onLoginClicked(){
             artistWin->show();
             this->hide();
         }else{
-              QMessageBox::information(this, "Info", "Listener window coming soon!");
+            ListenerWindow* listenerWin = new ListenerWindow(
+                account.getId(),
+                listenerCtrl,
+                appCtrl,
+                nullptr
+                );
+            listenerWin->show();
+            this->hide();
         }
 
     }catch(const std::exception& e){

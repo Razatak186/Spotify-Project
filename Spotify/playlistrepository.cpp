@@ -49,6 +49,7 @@ bool PlaylistRepository::insertSong(int playlistId , int songId){
     for(auto& playlist : playlists){
         if(playlist.getId() == playlistId){
             playlist.addSong(songId);
+            saveToFile();
             return true;
         }
     }
@@ -59,6 +60,7 @@ bool PlaylistRepository::removeSong(int playlistId , int songId){
     for(auto& playlist : playlists){
         if(playlist.getId()== playlistId){
             playlist.removeSong(songId);
+            saveToFile();
             return true;
         }
     }

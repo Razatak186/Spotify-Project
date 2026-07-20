@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditPlaylistDialog</class>
+ <widget class="QDialog" name="EditPlaylistDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#EditPlaylistDialog {
+    background-color: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 #1DB954,
+        stop: 1 #191414
+    );
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="titleLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#titleLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>🎵 Edit New Playlist</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nameEdit">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit#nameEdit {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+}
+QLineEdit#nameEdit:focus {
+    border: 2px solid #1DB954;
+}
+QLineEdit#nameEdit::placeholder {
+    color: #999;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Playlist Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="okButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#okButton {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+QPushButton#okButton:hover {
+    background-color: #1ed760;
+}
+QPushButton#okButton:pressed {
+    background-color: #1aa34a;
+}</string>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancelButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton#cancelButton {
+    background-color: rgba(231, 76, 60, 0.85);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+QPushButton#cancelButton:hover {
+    background-color: rgba(231, 76, 60, 1.0);
+}
+QPushButton#cancelButton:pressed {
+    background-color: rgba(192, 57, 43, 1.0);
+}</string>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,3 +1,4 @@
+
 #ifndef LISTENERCONTROLLER_H
 #define LISTENERCONTROLLER_H
 
@@ -28,6 +29,8 @@ public:
     std::vector<Account> seeAllArtists();
     std::vector<Album> getArtistAlbums(int artistId);
     std::vector<Song> getAlbumSongs(int albumId);
+    std::vector<Song> getSingleSongs(int artistId);
+
 
     int createPlaylist(int listenerId , const std::string& name);
     int editPlaylist(int playlistId , int listenerId , const std::string& newName);
@@ -46,6 +49,7 @@ public:
     std::vector<Song> searchSong(const std::string& query);
     std::vector<Song> filterByGenre(const std::string& genre);
     std::vector<Song> filterByYear(int year);
+    std::optional<Playlist> getPlaylistById(int playlistId);
 };
 
 #endif // LISTENERCONTROLLER_H

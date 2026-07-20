@@ -9,6 +9,7 @@ CONFIG += c++17
 SOURCES += \
     account.cpp \
     addalbumdialog.cpp \
+    addplaylistdialog.cpp \
     addsongdialog.cpp \
     album.cpp \
     albumrepository.cpp \
@@ -17,16 +18,19 @@ SOURCES += \
     artistrepository.cpp \
     artistwindow.cpp \
     editalbumdialog.cpp \
+    editplaylistdialog.cpp \
     editprofiledialog.cpp \
     editsongdialog.cpp \
     listenercontroller.cpp \
     listenerrepository.cpp \
+    listenerwindow.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     playlist.cpp \
     playlistrepository.cpp \
     registerwindow.cpp \
+    selectplaylistdialog.cpp \
     song.cpp \
     songrepository.cpp \
     sorthelper.cpp
@@ -36,6 +40,7 @@ HEADERS += \
     account.h \
     accountrepository.h \
     addalbumdialog.h \
+    addplaylistdialog.h \
     addsongdialog.h \
     album.h \
     albumrepository.h \
@@ -44,29 +49,36 @@ HEADERS += \
     artistrepository.h \
     artistwindow.h \
     editalbumdialog.h \
+    editplaylistdialog.h \
     editprofiledialog.h \
     editsongdialog.h \
     listenercontroller.h \
     listenerrepository.h \
+    listenerwindow.h \
     loginwindow.h \
     mainwindow.h \
     playlist.h \
     playlistrepository.h \
     registerwindow.h \
+    selectplaylistdialog.h \
     song.h \
     songrepository.h \
     sorthelper.h
 
 FORMS += \
     addalbumdialog.ui \
+    addplaylistdialog.ui \
     addsongdialog.ui \
     artistwindow.ui \
     editalbumdialog.ui \
+    editplaylistdialog.ui \
     editprofiledialog.ui \
     editsongdialog.ui \
+    listenerwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
-    registerwindow.ui
+    registerwindow.ui \
+    selectplaylistdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
