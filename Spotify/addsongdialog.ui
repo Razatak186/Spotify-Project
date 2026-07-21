@@ -44,6 +44,78 @@
       </widget>
      </item>
      <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="imageLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#imageLabel {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    color: white;
+    font-size: 36px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="chooseImageButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+
+background-color: #3b3b3b;
+
+color: white;
+
+border: 2px solid #1DB954;
+
+border-radius: 20px;
+
+padding: 10px 20px;
+
+font-weight: bold;
+
+}
+
+
+
+QPushButton:hover {
+
+background-color: #4a4a4a;
+
+}
+
+
+
+QPushButton:pressed {
+
+background-color: #2a2a2a;
+
+}</string>
+       </property>
+       <property name="text">
+        <string>📷 Choose Image</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLineEdit" name="titleEdit">
        <property name="styleSheet">
         <string notr="true">QLineEdit#titleEdit {

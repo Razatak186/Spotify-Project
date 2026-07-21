@@ -25,12 +25,17 @@ public:
     int getYear() const;
     QString getFilePath() const;
 
+    void setSongImage(const QImage& image);
+    QImage getSongImage()const;
+
 private slots:
     void onOkClicked();
     void onCancelClicked();
     void onBrowseClicked();
+    void onChooseImageClicked();
 private:
     Ui::EditSongDialog *ui;
+    QImage songImage;
 };
 
 #endif // EDITSONGDIALOG_H

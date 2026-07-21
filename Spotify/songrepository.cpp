@@ -11,6 +11,7 @@ int SongRepository::save(const Song& item){
     for( auto& song : songs ){
         if(song.getId()== item.getId()){
             song = item;
+            saveToFile();
             return song.getId();
         }
     }

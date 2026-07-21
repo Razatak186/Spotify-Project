@@ -1,4 +1,5 @@
 #include "song.h"
+#include<QBuffer>
 
 Song::Song() : id(0) , releaseYear(0) , artistId(0), albumId(0) {}
 
@@ -35,6 +36,11 @@ QJsonObject Song::toJson()const{
     obj["artistId"] = artistId;
     obj["albumId"] = albumId;
     obj["filePath"] = QString::fromStdString(filePath);
+
+    QByteArray imageData = imageToByteArray();
+    obj["songImage"] = QString::fromUtf8(imageData.toBase64());
+
+
     return obj;
 }
 
@@ -47,5 +53,27 @@ Song Song::fromJson(const QJsonObject& obj){
     s.setArtistId(obj["artistId"].toInt());
     s.setAlbumId(obj["albumId"].toInt());
     s.setFilePath(obj["filePath"].toString().toStdString());
+
+    QString base64 = obj["songImage"].toString();
+    if(!base64.isEmpty()){
+        QByteArray imageData = QByteArray::fromBase64(base64.toUtf8());
+        s.setImageFromByteArray(imageData);
+    }
+
     return s;
+}
+
+QByteArray Song::imageToByteArray()const{
+    QByteArray byteArray;
+    if(songImage.isNull()){
+        return byteArray;
+    }
+
+    QBuffer buffer(&byteArray);
+    songImage.save(&buffer,"PNG");
+    return byteArray;
+}
+
+void Song::setImageFromByteArray(const QByteArray& data){
+    songImage.loadFromData(data);
 }

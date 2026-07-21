@@ -12,6 +12,7 @@ EditSongDialog::EditSongDialog(QWidget *parent)
     connect(ui->okButton, &QPushButton::clicked, this, &EditSongDialog::onOkClicked);
     connect(ui->cancelButton, &QPushButton::clicked, this, &EditSongDialog::onCancelClicked);
     connect(ui->browseButton, &QPushButton::clicked, this, &EditSongDialog::onBrowseClicked);
+    connect(ui->chooseImageButton,&QPushButton::clicked,this,&EditSongDialog::onChooseImageClicked);
     ui->yearSpin->setValue(2026);
 }
 
@@ -99,4 +100,33 @@ void EditSongDialog::onOkClicked()
 void EditSongDialog::onCancelClicked()
 {
     reject();
+}
+
+void EditSongDialog::setSongImage(const QImage& image){
+    songImage = image;
+    if(!image.isNull()){
+        QPixmap pixmap = QPixmap::fromImage(image);
+        ui->imageLabel->setPixmap(pixmap.scaled(80,80,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        ui->imageLabel->setScaledContents(true);
+    }
+}
+
+QImage EditSongDialog::getSongImage()const{
+    return songImage;
+}
+
+void EditSongDialog::onChooseImageClicked(){
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        "Select Song Image",
+        "",
+        "Images (*.png *.jpg *.jpeg *.gif)"
+        );
+
+    if(!filePath.isEmpty()){
+        songImage.load(filePath);
+        QPixmap pixmap = QPixmap::fromImage(songImage);
+        ui->imageLabel->setPixmap(pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        ui->imageLabel->setScaledContents(true);
+    }
 }

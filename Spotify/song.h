@@ -39,6 +39,9 @@ public:
 
     QJsonObject toJson()const;
     static Song fromJson(const QJsonObject& obj);
+
+    QByteArray imageToByteArray()const;
+    void setImageFromByteArray(const QByteArray& data);
 };
 
 #endif // SONG_H

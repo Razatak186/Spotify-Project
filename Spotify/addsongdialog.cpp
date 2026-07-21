@@ -13,6 +13,7 @@ AddSongDialog::AddSongDialog(QWidget *parent, int albumId)
     connect(ui->okButton,&QPushButton::clicked,this,&AddSongDialog::onOkclicked);
     connect(ui->cancelButton,&QPushButton::clicked,this,&AddSongDialog::onCancleClicked);
     connect(ui->browseButton,&QPushButton::clicked,this,&AddSongDialog::onBrowseClicked);
+    connect(ui->chooseImageButton,&QPushButton::clicked,this,&AddSongDialog::onChooseImageClicked);
     ui->yearSpin->setValue(2026);
 }
 
@@ -81,4 +82,33 @@ void AddSongDialog::onOkclicked(){
 
 void AddSongDialog::onCancleClicked(){
     reject();
+}
+
+void AddSongDialog::onChooseImageClicked(){
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        "Select Song Image",
+        "",
+        "Images (*.png *.jpg *.jpeg *.gif)"
+        );
+    if(!filePath.isEmpty()){
+        songImage.load(filePath);
+        QPixmap pixmap = QPixmap::fromImage(songImage);
+        ui->imageLabel->setPixmap(pixmap.scaled(80,80,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        ui->imageLabel->setScaledContents(true);
+    }
+
+}
+
+QImage AddSongDialog::getSongImage()const{
+    return songImage;
+}
+
+void AddSongDialog::setSongImage(const QImage& image){
+    songImage = image;
+    if(!image.isNull()){
+        QPixmap pixmap = QPixmap::fromImage(image);
+        ui->imageLabel->setPixmap(pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        ui->imageLabel->setScaledContents(true);
+    }
 }

@@ -19,11 +19,11 @@ public:
 
     int createAlbum(int artistId , std::string name,const  QImage& cover = QImage());
     int createSong(int artistId , std::string title, std::string genre,
-                   int releaseYear , std::string filePath , int albumId=0);
+                   int releaseYear , std::string filePath , int albumId=0,QImage songImage = QImage());
     std::vector<Album> getArtistAlbums(int artistId);
 
     int editSong(int artistId , std::string title , std::string genre,
-                 int releaseYear , std::string filePath , int songId,int albumId=0);
+                 int releaseYear , std::string filePath , int songId,int albumId=0,QImage songImage = QImage());
 
     int editAlbum(int albumId , int artistId ,
                  const std::string& name,

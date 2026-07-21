@@ -23,13 +23,17 @@ public:
     int getAlbumId()const;
 
     void setalbumId(int id);
+    void setSongImage(const QImage& image);
+    QImage getSongImage()const;
 private slots:
     void onOkclicked();
     void onCancleClicked();
     void onBrowseClicked();
+    void onChooseImageClicked();
 private:
     Ui::AddSongDialog *ui;
     int m_albumId;
+    QImage songImage;
 };
 
 #endif // ADDSONGDIALOG_H

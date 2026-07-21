@@ -18,9 +18,10 @@ int ArtistController::createAlbum(int artistId , std::string name, const QImage 
 
 
 int ArtistController::createSong(int artistId , std::string title, std::string genre,
-                                 int releaseYear , std::string filePath , int albumId){
+                                 int releaseYear , std::string filePath , int albumId,QImage songImage){
         Song newSong(0,title , genre , releaseYear , artistId , albumId);
         newSong.setFilePath(filePath);
+        newSong.setSongImage(songImage);
         int newId = songRepo.save(newSong);
 
         if(albumId!=0){
@@ -44,7 +45,7 @@ std::vector<Album> ArtistController::getArtistAlbums(int artistId){
 }
 
 int ArtistController::editSong(int  artistId , std::string title , std::string genre,
-                                  int releaseYear , std::string filePath , int songId,int albumId){
+                               int releaseYear , std::string filePath , int songId, int albumId, QImage songImage){
     std::optional<Song> oldSong = songRepo.search(songId);
     if(oldSong.has_value()){
         if(oldSong.value().getArtistId() == artistId){
@@ -57,6 +58,9 @@ int ArtistController::editSong(int  artistId , std::string title , std::string g
 
             Song newSong(songId,title , genre , releaseYear , artistId , albumId);
             newSong.setFilePath(filePath);
+            if(!songImage.isNull()){
+                newSong.setSongImage(songImage);
+            }
 
             songRepo.save(newSong);
 

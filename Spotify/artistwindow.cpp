@@ -111,6 +111,12 @@ void ArtistWindow::loadSongs(int albumId){
     for(const auto& song : songs){
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(song.getTitle()));
         item->setData(Qt::UserRole, song.getId());
+        QImage songImg = song.getSongImage();
+        if (!songImg.isNull()) {
+            QPixmap pixmap = QPixmap::fromImage(songImg);
+            QIcon icon(pixmap.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            item->setIcon(icon);
+        }
         ui->listWidget_2->addItem(item);
     }
 }
@@ -121,6 +127,12 @@ void ArtistWindow::loadSingles(){
     for(const auto& song : songs){
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(song.getTitle()));
         item->setData(Qt::UserRole, song.getId());
+        QImage songImg = song.getSongImage();
+        if (!songImg.isNull()) {
+            QPixmap pixmap = QPixmap::fromImage(songImg);
+            QIcon icon(pixmap.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            item->setIcon(icon);
+        }
         ui->listWidget_3->addItem(item);
     }
 }
@@ -212,14 +224,15 @@ void ArtistWindow::onAddClicked() {
                 QString genre = dialog.getGenre();
                 int year = dialog.getYear();
                 QString filePath = dialog.getFilePath();
-
+                QImage image = dialog.getSongImage();
                 artistCtrl.createSong(
                     currentArtsitId,
                     title.toStdString(),
                     genre.toStdString(),
                     year,
                     filePath.toStdString(),
-                    albumId
+                    albumId,
+                    image
                     );
                 refreshAll();
                 QMessageBox::information(this,"Success","Song added successfully!");
@@ -236,14 +249,15 @@ void ArtistWindow::onAddClicked() {
                 QString genre = dialog.getGenre();
                 int year = dialog.getYear();
                 QString filePath = dialog.getFilePath();
-
+                QImage image = dialog.getSongImage();
                 artistCtrl.createSong(
                     currentArtsitId,
                     title.toStdString(),
                     genre.toStdString(),
                     year,
                     filePath.toStdString(),
-                    0
+                    0,
+                    image
                     );
                 refreshAll();
                 QMessageBox::information(this , "Success", "Single added successfuly!");
@@ -306,6 +320,7 @@ void ArtistWindow::onEditClicked() {
         dialog.setGenre(QString::fromStdString(song.getGenre()));
         dialog.setYear(song.getReleaseYear());
         dialog.setFilePath(QString::fromStdString(song.getFilePath()));
+        dialog.setSongImage(song.getSongImage());
 
         if(dialog.exec() == QDialog::Accepted){
             try {
@@ -316,7 +331,8 @@ void ArtistWindow::onEditClicked() {
                     dialog.getYear(),
                     dialog.getFilePath().toStdString(),
                     songId,
-                    song.getAlbumId()
+                    song.getAlbumId(),
+                    dialog.getSongImage()
                     );
                 refreshAll();
                 QMessageBox::information(this, "Success", "Song updated successfully!");
@@ -344,6 +360,7 @@ void ArtistWindow::onEditClicked() {
         dialog.setGenre(QString::fromStdString(song.getGenre()));
         dialog.setYear(song.getReleaseYear());
         dialog.setFilePath(QString::fromStdString(song.getFilePath()));
+        dialog.setSongImage(song.getSongImage());
 
         if (dialog.exec() == QDialog::Accepted) {
             try {
@@ -354,7 +371,8 @@ void ArtistWindow::onEditClicked() {
                     dialog.getYear(),
                     dialog.getFilePath().toStdString(),
                     songId,
-                    0
+                    0,
+                    dialog.getSongImage()
                     );
                 refreshAll();
                 QMessageBox::information(this, "Success", "Single updated successfully!");

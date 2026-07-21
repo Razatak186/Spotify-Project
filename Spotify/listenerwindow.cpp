@@ -182,6 +182,12 @@ void ListenerWindow::loadSongs(int albumId){
     for(const auto& song : songs){
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(song.getTitle()));
         item->setData(Qt::UserRole,song.getId());
+        QImage songImg = song.getSongImage();
+        if (!songImg.isNull()) {
+            QPixmap pixmap = QPixmap::fromImage(songImg);
+            QIcon icon(pixmap.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            item->setIcon(icon);
+        }
         ui->songList->addItem(item);
     }
 }
@@ -245,6 +251,13 @@ void ListenerWindow::onAlbumClicked(QListWidgetItem* item){
             for (const auto& song : singles) {
                 QListWidgetItem* songItem = new QListWidgetItem(QString::fromStdString(song.getTitle()));
                 songItem->setData(Qt::UserRole, song.getId());
+                QImage songImg = song.getSongImage();
+                if (!songImg.isNull()) {
+                    QPixmap pixmap = QPixmap::fromImage(songImg);
+                    QIcon icon(pixmap.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                    songItem->setIcon(icon);
+                }
+
                 ui->songList->addItem(songItem);
             }
         }
