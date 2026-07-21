@@ -1,4 +1,5 @@
 #include "album.h"
+#include "qbuffer.h"
 #include<algorithm>
 Album::Album() : id(0) , artistId(0) {}
 
@@ -50,6 +51,9 @@ QJsonObject Album::toJson() const{
         songsArray.append(id);
     }
     obj["songsIds"] = songsArray;
+    QByteArray coverData = coverToByteArray();
+
+    obj["cover"] = QString::fromUtf8(coverData.toBase64());
     return obj;
 
 }
@@ -65,5 +69,27 @@ Album Album::fromJson(const QJsonObject& obj){
         songsIds.push_back(val.toInt());
     }
     a.setSongIds(songsIds);
+    QString base64 = obj["cover"].toString();
+    if (!base64.isEmpty()) {
+        QByteArray coverData = QByteArray::fromBase64(base64.toUtf8());
+        a.setCoverFromByteArray(coverData);
+    }
     return a;
+}
+
+QByteArray Album::coverToByteArray()const{
+    QByteArray byteArray;
+    if(cover.isNull()){
+
+        return byteArray;
+    }
+    QBuffer buffer(&byteArray);
+    cover.save(&buffer, "PNG");
+
+    return byteArray;
+}
+
+void Album::setCoverFromByteArray(const QByteArray& data){
+    cover.loadFromData(data);
+
 }

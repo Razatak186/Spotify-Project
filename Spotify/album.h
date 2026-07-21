@@ -37,6 +37,9 @@ public:
 
     QJsonObject toJson()const;
     static Album fromJson(const QJsonObject& obj);
+
+    QByteArray coverToByteArray()const;
+    void setCoverFromByteArray(const QByteArray& data);
 };
 
 #endif // ALBUM_H

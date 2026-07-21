@@ -17,11 +17,16 @@ public:
 
     void setAlbumName(const QString& name);
     QString getAlbumName()const;
+
+    void setCoverImage(const QImage& cover);
+    QImage getCoverImage()const;
 private slots:
     void onOkClicked();
     void onCancelClicked();
+    void onChooseCoverClicked();
 private:
     Ui::EditAlbumDialog *ui;
+    QImage coverImage;
 };
 
 #endif // EDITALBUMDIALOG_H

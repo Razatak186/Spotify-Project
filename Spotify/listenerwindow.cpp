@@ -151,6 +151,13 @@ void ListenerWindow::loadAlbums(int artistId){
     for(const auto& album : albums){
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(album.getName()));
         item->setData(Qt::UserRole,album.getId());
+
+         QImage cover = album.getCover();
+        if (!cover.isNull()) {
+            QPixmap pixmap = QPixmap::fromImage(cover);
+            QIcon icon(pixmap.scaled(40, 40, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            item->setIcon(icon);
+        }
         ui->albumList->addItem(item);
     }
 
@@ -158,6 +165,7 @@ void ListenerWindow::loadAlbums(int artistId){
     if(!singles.empty()){
         QListWidgetItem* singleItem = new QListWidgetItem("📌 Singles");
         singleItem->setData(Qt::UserRole,-1);
+
         ui->albumList->addItem(singleItem);
     }
 

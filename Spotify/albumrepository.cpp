@@ -7,14 +7,17 @@ AlbumRepository::AlbumRepository(){
 }
 
 int AlbumRepository::save(const Album& item){
+
     for(auto& album : albums){
         if(album.getId()== item.getId()){
             album = item;
+            saveToFile();
             return album.getId();
         }
     }
 
     Album newAlbum = item;
+
     int maxId=0;
     for(const auto& album : albums){
         if(album.getId() > maxId) maxId = album.getId();

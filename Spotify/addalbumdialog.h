@@ -16,11 +16,14 @@ public:
     ~AddAlbumDialog();
 
     QString getAlbumName()const;
+    QImage getCoverImage()const;
 private slots:
     void onOKClicked();
     void onCancelclicked();
+    void onChooseCoverClicked();
 private:
     Ui::AddAlbumDialog *ui;
+    QImage coverImage;
 };
 
 #endif // ADDALBUMDIALOG_H

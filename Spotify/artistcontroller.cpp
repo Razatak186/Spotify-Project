@@ -6,9 +6,13 @@
 ArtistController::ArtistController(AlbumRepository& albumRepo , SongRepository& songRepo , PlaylistRepository& playlistRepo):
     albumRepo(albumRepo), songRepo(songRepo) , playlistRepo(playlistRepo){}
 
-int ArtistController::createAlbum(int artistId , std::string name){
+int ArtistController::createAlbum(int artistId , std::string name, const QImage &cover){
     Album newAlbum(0,name , artistId);
+
+    newAlbum.setCover(cover);
+
     int newId = albumRepo.save(newAlbum);
+
     return newId;
 }
 
@@ -81,7 +85,7 @@ int ArtistController::editSong(int  artistId , std::string title , std::string g
 }
 
 int ArtistController::editAlbum(int albumId , int artistId,
-                                const std::string& name , const std::vector<int>& songIds){
+                                const std::string& name , const std::vector<int>& songIds, QImage cover){
     std::optional<Album> oldAlbum = albumRepo.search(albumId);
     if(!oldAlbum.has_value()){
         throw std::runtime_error("Album not found.");
@@ -125,7 +129,9 @@ int ArtistController::editAlbum(int albumId , int artistId,
     Album newAlbum = oldAlbum.value();
     newAlbum.setName(name);
     newAlbum.setSongIds(songIds);
-
+    if(!cover.isNull()){
+        newAlbum.setCover(cover);
+    }
     return albumRepo.save(newAlbum);
 }
 

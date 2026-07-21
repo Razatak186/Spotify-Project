@@ -92,6 +92,14 @@ void ArtistWindow::loadAlbums(){
     for(const auto& album : albums){
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(album.getName()));
         item->setData(Qt::UserRole,album.getId());
+
+        QImage cover = album.getCover();
+        if(!cover.isNull()){
+            QPixmap pixmap = QPixmap::fromImage(cover);
+            QIcon icon(pixmap.scaled(40,40,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+            item->setIcon(icon);
+        }
+
         ui->listWidget->addItem(item);
     }
 }
@@ -178,9 +186,11 @@ void ArtistWindow::onAddClicked() {
         AddAlbumDialog dialog(this);
         if(dialog.exec() == QDialog::Accepted){
             QString name = dialog.getAlbumName();
+            QImage cover = dialog.getCoverImage();
+
             if(!name.isEmpty()){
                 try{
-                    artistCtrl.createAlbum(currentArtsitId, name.toStdString());
+                    artistCtrl.createAlbum(currentArtsitId, name.toStdString(),cover);
                     refreshAll();
                     QMessageBox::information(this ,"Success", "Album created successfully!");
                 }catch(const std::exception& e){
@@ -263,11 +273,14 @@ void ArtistWindow::onEditClicked() {
         Album album = albumOpt.value();
         EditAlbumDialog dialog(this);
         dialog.setAlbumName(QString::fromStdString(album.getName()));
+        dialog.setCoverImage(album.getCover());
 
         if(dialog.exec() == QDialog::Accepted){
             QString newName = dialog.getAlbumName();
+            QImage newCover = dialog.getCoverImage();
             try{
-                artistCtrl.editAlbum(albumId,currentArtsitId, newName.toStdString(),{});
+                artistCtrl.editAlbum(albumId,currentArtsitId, newName.toStdString(),{},newCover);
+                loadAlbums();
                 refreshAll();
                 QMessageBox::information(this, "Success", "Album updated successfully!");
             }catch(const std::exception& e){

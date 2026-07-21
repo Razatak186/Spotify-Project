@@ -17,7 +17,7 @@ public:
     ArtistController(AlbumRepository& albumRepo , SongRepository& songRepo ,PlaylistRepository& playlistRepo );
 
 
-    int createAlbum(int artistId , std::string name);
+    int createAlbum(int artistId , std::string name,const  QImage& cover = QImage());
     int createSong(int artistId , std::string title, std::string genre,
                    int releaseYear , std::string filePath , int albumId=0);
     std::vector<Album> getArtistAlbums(int artistId);
@@ -27,7 +27,7 @@ public:
 
     int editAlbum(int albumId , int artistId ,
                  const std::string& name,
-                  const std::vector<int>& songIds   );
+                  const std::vector<int>& songIds , QImage cover = QImage()  );
 
     bool deleteSong(int songId , int artistId);
     bool deleteAlbum(int albumId , int artistId);
