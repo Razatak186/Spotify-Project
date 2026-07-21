@@ -12,9 +12,9 @@ private:
     ListenerRepository& listener;
 public:
     AppController(ArtistRepository& artistRepo, ListenerRepository& listenerRepo);
-    void registeration(std::string fullName , std::string userName , std::string password , int role,std::string bio="");
+    void registeration(std::string fullName , std::string userName , std::string password , int role,std::string bio="",QImage profilePicture = QImage());
     Account login(std::string userName , std::string password);
-    void editAccount(int accountid , bool isArtist , std::string newFullName , std::string newUserName , std::string newPassword);
+    void editAccount(int accountid , bool isArtist , std::string newFullName , std::string newUserName , std::string newPassword,QImage newProfilePicture = QImage());
     void deleteAccount(int accountid, bool isArtist);
     std::optional<Account> getAccount(int accountId , bool isArtist);
 };

@@ -13,6 +13,7 @@ int ArtistRepository::save(const Account& item){
     for(auto& artist : artists){
         if(artist.getId()== item.getId()){
             artist = item;
+            saveToFile();
             return artist.getId();
         }
     }

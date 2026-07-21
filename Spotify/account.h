@@ -40,6 +40,9 @@ public:
 
     QJsonObject toJson()const;
     static Account fromJson(const QJsonObject& obj);
+
+    QByteArray imageToByteArray()const;
+    void setImageByteArray(const QByteArray& data);
 };
 
 #endif // ACCOUNT_H

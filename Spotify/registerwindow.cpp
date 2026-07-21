@@ -1,5 +1,6 @@
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
+#include<QFileDialog>
 #include<QMessageBox>
 RegisterWindow::RegisterWindow(AppController& appController,QWidget *parent)
     : QDialog(parent)
@@ -7,6 +8,10 @@ RegisterWindow::RegisterWindow(AppController& appController,QWidget *parent)
     ,appCtrl(appController)
 {
     ui->setupUi(this);
+
+    ui->photoLabel->setFixedSize(100, 100);
+    ui->photoLabel->setAlignment(Qt::AlignCenter);
+
     connect(ui->togglePasswordButton, &QToolButton::clicked, this, [this]() {
         if (ui->passwordEdit->echoMode() == QLineEdit::Password) {
             ui->passwordEdit->setEchoMode(QLineEdit::Normal);
@@ -18,6 +23,7 @@ RegisterWindow::RegisterWindow(AppController& appController,QWidget *parent)
     });
     connect(ui->registerButton, &QPushButton::clicked, this , &RegisterWindow::onRegisterClicked);
     connect(ui->cancelButton, &QPushButton::clicked, this , &RegisterWindow::onCancelClicked);
+    connect(ui->choosePhotoButton,&QPushButton::clicked,this, &RegisterWindow::onChoosePhotoClicked);
 }
 
 RegisterWindow::~RegisterWindow()
@@ -44,7 +50,7 @@ void RegisterWindow::onRegisterClicked(){
     }
 
     try{
-        appCtrl.registeration(fullname , username,password,role,bio);
+        appCtrl.registeration(fullname , username,password,role,bio,profileImage);
 
         ui->errorLabel->setText("");
         QMessageBox::information(this, "Success", "Account created successfully!");
@@ -61,5 +67,21 @@ void RegisterWindow::onCancelClicked(){
     this->close();
     if (parentWidget()) {
         parentWidget()->show();
+    }
+}
+
+void RegisterWindow::onChoosePhotoClicked(){
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        "Select Profile Picture",
+        "",
+        "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
+
+        );
+    if(!filePath.isEmpty()){
+        profileImage.load(filePath);
+        QPixmap pixmap = QPixmap::fromImage(profileImage);
+        ui->photoLabel->setPixmap(pixmap.scaled(100,100,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        ui->photoLabel->setScaledContents(true);
     }
 }

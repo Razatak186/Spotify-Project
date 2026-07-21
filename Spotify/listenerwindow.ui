@@ -19,6 +19,29 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
+        <widget class="QLabel" name="profilePhotoLabel">
+         <property name="styleSheet">
+          <string notr="true">QLabel#profilePhotoLabel {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 3px solid #1DB954;
+    border-radius: 35px;
+    padding: 3px;
+    min-width: 70px;
+    min-height: 70px;
+    max-width: 70px;
+    max-height: 70px;
+}
+QLabel#profilePhotoLabel:hover {
+    border: 3px solid #1ed760;
+    box-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="welcomeLabel">
          <property name="text">
           <string>👋 Welcome, Listener!</string>

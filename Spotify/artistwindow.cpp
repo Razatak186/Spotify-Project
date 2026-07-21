@@ -18,13 +18,23 @@ ArtistWindow::ArtistWindow(int artistId,ArtistController& controller,AppControll
 {
     ui->setupUi(this);
 
-
+    ui->profilePhotoLabel->setFixedSize(50, 50);
+    ui->profilePhotoLabel->setAlignment(Qt::AlignCenter);
     auto accountOpt = appCtrl.getAccount(artistId, true);
     if (accountOpt.has_value()) {
         ui->welcomeLabel->setText("👋 Welcome, " +
                                   QString::fromStdString(accountOpt.value().getFullName()) + "!");
+        QImage profilePic = accountOpt.value().getProfilePicture();
+        if(!profilePic.isNull()){
+           QPixmap pixmap = QPixmap::fromImage(profilePic);
+            ui->profilePhotoLabel->setPixmap(pixmap.scaled(50,50,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+               ui->profilePhotoLabel->setScaledContents(true);
+        }else{
+            ui->profilePhotoLabel->setText("👤");
+        }
     } else {
         ui->welcomeLabel->setText("👋 Welcome, Artist!");
+        ui->profilePhotoLabel->setText("👤");
     }
 
     ui->listWidget->setAutoFillBackground(false);
@@ -542,6 +552,7 @@ void ArtistWindow::onEditProfileClicked(){
     dialog.setFullName(QString::fromStdString(account.getFullName()));
     dialog.setUsername(QString::fromStdString(account.getUserName()));
     dialog.setPassword(QString::fromStdString(account.getPassword()));
+    dialog.setProfileImage(account.getProfilePicture());
 
     if(dialog.exec() == QDialog::Accepted){
         try{
@@ -550,13 +561,26 @@ void ArtistWindow::onEditProfileClicked(){
                 true,
                 dialog.getFullName().toStdString(),
                 dialog.getUsername().toStdString(),
-                dialog.getPassword().toStdString()
+                dialog.getPassword().toStdString(),
+                dialog.getProfileImage()
                 );
-             QMessageBox::information(this, "Success", "Profile updated successfully!");
+            auto updatedAccount = appCtrl.getAccount(currentArtsitId, true);
+            if (updatedAccount.has_value()) {
+                QImage newPic = updatedAccount.value().getProfilePicture();
+                if (!newPic.isNull()) {
+                    QPixmap pixmap = QPixmap::fromImage(newPic);
+                    ui->profilePhotoLabel->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                    ui->profilePhotoLabel->setScaledContents(true);
+                } else {
+                    ui->profilePhotoLabel->setText("👤");
+                }
+            }
 
-             ui->welcomeLabel->setText("👋 Welcome, " + dialog.getFullName() + "!");
-        }catch(const std::exception& e){
-            QMessageBox::warning(this, "Error" , e.what());
+            ui->welcomeLabel->setText("👋 Welcome, " + dialog.getFullName() + "!");
+            QMessageBox::information(this, "Success", "Profile updated successfully!");
+
+        } catch (const std::exception& e) {
+            QMessageBox::warning(this, "Error", e.what());
         }
     }
 }

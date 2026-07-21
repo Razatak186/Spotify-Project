@@ -23,13 +23,16 @@ public:
     QString getUsername()const;
     QString getPassword()const;
 
+    void setProfileImage(const QImage& image);
+    QImage getProfileImage()const;
+
 private slots:
     void onSaveClicked();
     void onCancelCLicked();
-
+    void onChoosePhotoClicked();
 private:
     Ui::EditProfileDialog *ui;
-
+    QImage profileImage;
 
 };
 

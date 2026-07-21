@@ -57,6 +57,65 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="photoLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel#photoLabel {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    color: white;
+    font-size: 36px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="choosePhotoButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+
+background-color: #3b3b3b;
+
+color: white;
+
+border: 2px solid #1DB954;
+
+border-radius: 20px;
+
+padding: 10px 20px;
+
+font-weight: bold;
+
+}
+
+
+
+QPushButton:hover {
+
+background-color: #4a4a4a;
+
+}
+
+
+
+QPushButton:pressed {
+
+background-color: #2a2a2a;
+
+}</string>
+       </property>
+       <property name="text">
+        <string>📷 Change Photo</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLineEdit" name="fullNameEdit">
        <property name="styleSheet">
         <string notr="true">QLineEdit#fullNameEdit {

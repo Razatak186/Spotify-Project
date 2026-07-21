@@ -18,9 +18,11 @@ public:
 private slots:
     void onRegisterClicked();
     void onCancelClicked();
+    void onChoosePhotoClicked();
 private:
     Ui::RegisterWindow *ui;
     AppController& appCtrl;
+    QImage profileImage;
 };
 
 #endif // REGISTERWINDOW_H

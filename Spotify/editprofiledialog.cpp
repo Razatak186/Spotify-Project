@@ -1,6 +1,7 @@
 #include "editprofiledialog.h"
 #include "ui_editprofiledialog.h"
 #include<QMessageBox>
+#include<QFileDialog>
 
 EditProfileDialog::EditProfileDialog(QWidget *parent)
     : QDialog(parent)
@@ -10,6 +11,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
 
     connect(ui->saveButton, &QPushButton::clicked, this , &EditProfileDialog::onSaveClicked);
     connect(ui->cancelButton, &QPushButton::clicked , this , &EditProfileDialog::onCancelCLicked);
+    connect(ui->choosePhotoButton,&QPushButton::clicked,this,&EditProfileDialog::onChoosePhotoClicked);
 }
 
 EditProfileDialog::~EditProfileDialog()
@@ -67,4 +69,34 @@ void EditProfileDialog::onSaveClicked(){
 
 void EditProfileDialog::onCancelCLicked(){
     reject();
+}
+
+void EditProfileDialog::setProfileImage(const QImage& image){
+    profileImage = image;
+    if(!image.isNull()){
+        QPixmap pixmap = QPixmap::fromImage(image);
+        ui->photoLabel->setPixmap(pixmap.scaled(80,80,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        ui->photoLabel->setScaledContents(true);
+    }else{
+        ui->photoLabel->setText("👤");
+    }
+}
+
+QImage EditProfileDialog::getProfileImage()const{
+    return profileImage;
+}
+
+void EditProfileDialog::onChoosePhotoClicked() {
+    QString filePath = QFileDialog::getOpenFileName(
+        this,
+        "Select Profile Picture",
+        "",
+        "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
+        );
+    if (!filePath.isEmpty()) {
+        profileImage.load(filePath);
+        QPixmap pixmap = QPixmap::fromImage(profileImage);
+        ui->photoLabel->setPixmap(pixmap.scaled(80, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        ui->photoLabel->setScaledContents(true);
+    }
 }

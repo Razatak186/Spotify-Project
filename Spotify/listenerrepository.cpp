@@ -11,6 +11,7 @@ int ListenerRepository::save(const Account& item){
     for(auto& listener : listeners){
         if(listener.getId() == item.getId()){
             listener = item;
+            saveToFile();
             return listener.getId();
         }
 

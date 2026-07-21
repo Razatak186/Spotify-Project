@@ -1,4 +1,5 @@
 #include "account.h"
+#include<QBuffer>
 
 Account::Account() : id(0), role(0) {}
 
@@ -35,6 +36,9 @@ QJsonObject Account::toJson() const{
     obj["bio"] = QString::fromStdString(bio);
     obj["password"] = QString::fromStdString(password);
     obj["role"] = role;
+
+    QByteArray imageData = imageToByteArray();
+    obj["profilePicture"] = QString::fromUtf8(imageData.toBase64());
     return obj;
 }
 
@@ -46,5 +50,23 @@ Account Account::fromJson(const QJsonObject& obj){
     a.setBio(obj["bio"].toString().toStdString());
     a.setPassword(obj["password"].toString().toStdString());
     a.setRole(obj["role"].toInt());
+
+    QString base64 = obj["profilePicture"].toString();
+    if(!base64.isEmpty()){
+        QByteArray imageData = QByteArray::fromBase64(base64.toUtf8());
+        a.setImageByteArray(imageData);
+    }
     return a;
 }
+
+QByteArray Account::imageToByteArray()const{
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    profilePicture.save(&buffer,"PNG");
+    return byteArray;
+}
+
+void Account::setImageByteArray(const QByteArray& data){
+    profilePicture.loadFromData(data);
+}
+

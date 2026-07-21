@@ -2,7 +2,7 @@
 
 AppController::AppController(ArtistRepository& artistRepo , ListenerRepository& listenerRepo) : artist(artistRepo), listener(listenerRepo){}
 
-void AppController::registeration(std::string fullName , std::string userName , std::string password , int role, std::string bio){
+void AppController::registeration(std::string fullName , std::string userName , std::string password , int role, std::string bio,QImage profilePicture){
     std::optional<Account> result = artist.searchByUserName(userName);
     if(result.has_value()){
         throw std::runtime_error("The username is already exist.");
@@ -16,6 +16,7 @@ void AppController::registeration(std::string fullName , std::string userName , 
 
     Account newAccount(0,fullName,userName,password,role);
     newAccount.setBio(bio);
+    newAccount.setProfilePicture(profilePicture);
     if(role ==1){
         artist.save(newAccount);
     }else if(role==0){
@@ -46,7 +47,7 @@ Account AppController::login(std::string userName , std::string password){
      throw std::runtime_error("No account found whit this username.");
 }
 
-void AppController::editAccount(int accountId , bool isArtist , std::string newFullName , std::string newUserName , std::string newPassword){
+void AppController::editAccount(int accountId , bool isArtist , std::string newFullName , std::string newUserName , std::string newPassword, QImage newProfilePicture){
     std::optional<Account> thisAccount;
     if(isArtist){
         thisAccount = artist.search(accountId);
@@ -77,6 +78,9 @@ void AppController::editAccount(int accountId , bool isArtist , std::string newF
     thisAccount->setFullname(newFullName);
     thisAccount->setUsername(newUserName);
     thisAccount->setPassword(newPassword);
+    if (!newProfilePicture.isNull()) {
+        thisAccount->setProfilePicture(newProfilePicture);
+    }
 
     if(isArtist){
         artist.save(thisAccount.value());

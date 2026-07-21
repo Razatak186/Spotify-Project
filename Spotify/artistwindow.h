@@ -7,6 +7,15 @@
 #include<QListWidget>
 #include<addalbumdialog.h>
 inline const QString LIGHT_STYLE = R"(
+
+QLabel#profilePhotoLabel {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    color: white;
+    font-size: 22px;
+}
+
 QWidget#ArtistWindow {
     background-color: qlineargradient(
         x1: 0, y1: 0, x2: 1, y2: 1,
@@ -264,6 +273,15 @@ QPushButton#deleteProfileButton:pressed {
 )";
 
 inline const QString DARK_STYLE= R"(
+
+QLabel#profilePhotoLabel {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(29, 185, 84, 0.5);
+    border-radius: 25px;
+    color: #d4edda;
+    font-size: 22px;
+}
+
 
 QLineEdit#searchEdit {
     background-color: rgba(255, 255, 255, 0.12);
