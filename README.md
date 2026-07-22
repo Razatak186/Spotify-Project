@@ -1,4 +1,4 @@
-# 🎵 سیستم مدیریت موسیقی Spotify
+
 
 <h1 align="center">🎵 Spotify Music Management System</h1>
 
