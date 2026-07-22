@@ -96,6 +96,9 @@ QLineEdit#nameEdit::placeholder {
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="okButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton#okButton {
     background-color: #1DB954;
@@ -120,6 +123,9 @@ QPushButton#okButton:pressed {
        </item>
        <item>
         <widget class="QPushButton" name="cancelButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton#cancelButton {
     background-color: rgba(231, 76, 60, 0.85);

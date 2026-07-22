@@ -1,4 +1,5 @@
 QT += widgets
+QT += widgets multimedia
 
 CONFIG += c++17
 
@@ -27,6 +28,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    playbackmanager.cpp \
     playlist.cpp \
     playlistrepository.cpp \
     registerwindow.cpp \
@@ -57,6 +59,7 @@ HEADERS += \
     listenerwindow.h \
     loginwindow.h \
     mainwindow.h \
+    playbackmanager.h \
     playlist.h \
     playlistrepository.h \
     registerwindow.h \

@@ -5,8 +5,124 @@
 #include "listenercontroller.h"
 #include "qlistwidget.h"
 #include <QWidget>
+#include<playbackmanager.h>
 
 inline const QString LIGHT_STYLES = R"(
+
+
+QSlider#positionSlider {
+    height: 6px;
+    border-radius: 3px;
+}
+QSlider#positionSlider::groove:horizontal {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+QSlider#positionSlider::handle:horizontal {
+    background: #1DB954;
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+QSlider#positionSlider::handle:horizontal:hover {
+    background: #1ed760;
+}
+QSlider#positionSlider::sub-page:horizontal {
+    background: #1DB954;
+    border-radius: 3px;
+}
+
+QSlider#volumeSlider {
+    height: 5px;
+    border-radius: 2px;
+}
+QSlider#volumeSlider::groove:horizontal {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+QSlider#volumeSlider::handle:horizontal {
+    background: white;
+    width: 12px;
+    height: 12px;
+    margin: -4px 0;
+    border-radius: 6px;
+}
+QSlider#volumeSlider::handle:horizontal:hover {
+    background: #1DB954;
+}
+QSlider#volumeSlider::sub-page:horizontal {
+    background: white;
+    border-radius: 2px;
+}
+
+QLabel#nowPlayingLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+}
+QLabel#nowPlayingLabel:disabled {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+QLabel#timeLabel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 80px;
+}
+
+QLabel#volumeLabel {
+    font-size: 16px;
+    color: white;
+    min-width: 30px;
+}
+
+QPushButton#playButton {
+    background-color: #1DB954;
+    color: white;
+    border: 2px solid #1DB954;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: bold;
+    font-size: 13px;
+    min-width: 80px;
+}
+QPushButton#playButton:hover {
+    background-color: #1ed760;
+    border: 2px solid #1ed760;
+}
+QPushButton#playButton:pressed {
+    background-color: #1aa34a;
+}
+QPushButton#playButton:disabled {
+    background-color: rgba(29, 185, 84, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+QPushButton#prevButton, QPushButton#nextButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    min-width: 50px;
+}
+QPushButton#prevButton:hover, QPushButton#nextButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+QPushButton#prevButton:pressed, QPushButton#nextButton:pressed {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+QPushButton#prevButton:disabled, QPushButton#nextButton:disabled {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+}
+
 
 QLabel#profilePhotoLabel {
     background-color: rgba(255, 255, 255, 0.2);
@@ -356,6 +472,115 @@ QPushButton#deleteProfileButton:pressed {
 )";
 
 inline const QString DARK_STYLES = R"(
+
+
+QSlider#positionSlider {
+    height: 6px;
+    border-radius: 3px;
+}
+QSlider#positionSlider::groove:horizontal {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+QSlider#positionSlider::handle:horizontal {
+    background: #1DB954;
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+QSlider#positionSlider::handle:horizontal:hover {
+    background: #1ed760;
+}
+QSlider#positionSlider::sub-page:horizontal {
+    background: #1DB954;
+    border-radius: 3px;
+}
+
+QSlider#volumeSlider {
+    height: 5px;
+    border-radius: 2px;
+}
+QSlider#volumeSlider::groove:horizontal {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+QSlider#volumeSlider::handle:horizontal {
+    background: #d4edda;
+    width: 12px;
+    height: 12px;
+    margin: -4px 0;
+    border-radius: 6px;
+}
+QSlider#volumeSlider::handle:horizontal:hover {
+    background: #1DB954;
+}
+QSlider#volumeSlider::sub-page:horizontal {
+    background: #d4edda;
+    border-radius: 2px;
+}
+
+QLabel#nowPlayingLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #d4edda;
+    padding: 5px;
+}
+QLabel#nowPlayingLabel:disabled {
+    color: rgba(212, 237, 218, 0.4);
+}
+
+QLabel#timeLabel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 80px;
+}
+
+QLabel#volumeLabel {
+    font-size: 16px;
+    color: #d4edda;
+    min-width: 30px;
+}
+
+QPushButton#playButton {
+    background-color: rgba(29, 185, 84, 0.8);
+    color: white;
+    border: 2px solid rgba(29, 185, 84, 0.4);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: bold;
+    font-size: 13px;
+    min-width: 80px;
+}
+QPushButton#playButton:hover {
+    background-color: rgba(29, 185, 84, 1.0);
+    border: 2px solid #1DB954;
+}
+QPushButton#playButton:disabled {
+    background-color: rgba(29, 185, 84, 0.2);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+QPushButton#prevButton, QPushButton#nextButton {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    min-width: 50px;
+}
+QPushButton#prevButton:hover, QPushButton#nextButton:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+}
+QPushButton#prevButton:disabled, QPushButton#nextButton:disabled {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.2);
+}
+
 QLabel#profilePhotoLabel {
     background-color: rgba(255, 255, 255, 0.08);
     border: 2px solid rgba(29, 185, 84, 0.5);
@@ -702,6 +927,13 @@ private slots:
     void onRemoveFromPlaylistClicked();
     void onPlaylistSongsClicked(QListWidgetItem* item);
 
+    void onPlayButtonClicked();
+    void onPrevButtonClicked();
+    void onNextButtonClicked();
+    void onVolumeChanged(int volume);
+    void onSongChanged(const Song& song);
+    void onSongDoubleClicked(QListWidgetItem* item);
+
 private:
     Ui::ListenerWindow *ui;
     ListenerController& listenerCtrl;
@@ -721,6 +953,7 @@ private:
     int getCurrentTab();
     int getSelectedItemId(QListWidget* list);
     void updateActionButtons();
+    PlaybackManager playbackManager;
 };
 
 #endif // LISTENERWINDOW_H

@@ -8,6 +8,7 @@
 #include<sorthelper.h>
 #include<editprofiledialog.h>
 
+
 ArtistWindow::ArtistWindow(int artistId,ArtistController& controller,AppController& appController,QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ArtistWindow)
@@ -74,6 +75,19 @@ ArtistWindow::ArtistWindow(int artistId,ArtistController& controller,AppControll
     connect(ui->filterValueCombo , &QComboBox::currentIndexChanged, this , &ArtistWindow::onFilterValuechanged);
     connect(ui->editProfileButton, &QPushButton::clicked, this ,&ArtistWindow::onEditProfileClicked);
     connect(ui->deleteProfileButton, &QPushButton::clicked, this ,&ArtistWindow::onDeleteProfileClicked);
+    connect(ui->playButton, &QPushButton::clicked, this, &ArtistWindow::onPlayButtonclicked);
+    connect(ui->prevButton, &QPushButton::clicked, this, &ArtistWindow::onPrevButtonclicked);
+    connect(ui->nextButton, &QPushButton::clicked, this, &ArtistWindow::onNextButtonclicked);
+    connect(ui->volumeSlider, &QSlider::valueChanged, this, &ArtistWindow::onVolumechanged);
+    connect(&playbackManager, &PlaybackManager::songChanged, this, &ArtistWindow::onSongchanged);
+
+
+    ui->volumeSlider->setValue(50);
+    ui->volumeSlider->setRange(0, 100);
+
+
+    connect(ui->listWidget_2, &QListWidget::itemDoubleClicked, this, &ArtistWindow::onSongDoubleClicked);
+    connect(ui->listWidget_3, &QListWidget::itemDoubleClicked, this, &ArtistWindow::onSongDoubleClicked);
 
     ui->filterCombo->addItem("None");
     ui->filterCombo->addItem("Genre");
@@ -613,5 +627,69 @@ void ArtistWindow::onEditProfileClicked(){
         } catch (const std::exception& e) {
             QMessageBox::warning(this, "Error", e.what());
         }
+    }
+}
+
+void ArtistWindow::onPlayButtonclicked(){
+    if(playbackManager.isPlaying()){
+        playbackManager.pause();
+        ui->playButton->setText("▶️");
+    }else{
+        playbackManager.play();
+        ui->playButton->setText("⏸️");
+    }
+}
+
+void ArtistWindow::onPrevButtonclicked() {
+    playbackManager.previous();
+}
+
+void ArtistWindow::onNextButtonclicked() {
+    playbackManager.next();
+}
+
+void ArtistWindow::onVolumechanged(int value) {
+    playbackManager.setVolume(value);
+}
+
+void ArtistWindow::onSongchanged(const Song& song) {
+    ui->nowPlayingLabel->setText("🎵 " + QString::fromStdString(song.getTitle()));
+    ui->playButton->setText("⏸️");
+}
+
+void ArtistWindow::onSongDoubleClicked(QListWidgetItem* item){
+    int songId = item->data(Qt::UserRole).toInt();
+    auto songOpt = artistCtrl.getSongById(songId);
+    if(songOpt.has_value()){
+        Song currentSong = songOpt.value();
+
+        int currentTab = getCurrentTab();
+        std::vector<Song> playlist;
+
+        if(currentTab == 1){
+            int albumId = getSelectedItemId(ui->listWidget);
+            if(albumId != -1){
+                playlist = artistCtrl.getAlbumSongs(albumId);
+            }
+        }else if(currentTab == 2){
+            playlist = artistCtrl.getSingleSongs(currentArtsitId);
+
+        }
+
+        int index=0;
+        for(int i=0;i< (int)playlist.size();i++){
+            if(playlist[i].getId() == songId){
+                index = i;
+                break;
+            }
+        }
+
+        playbackManager.setPlaylist(playlist);
+        for(int i=0;i<index;i++){
+            playbackManager.next();
+        }
+        playbackManager.play();
+        ui->playButton->setText("⏸️");
+        onSongchanged(playlist[index]);
     }
 }

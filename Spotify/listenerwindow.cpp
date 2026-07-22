@@ -78,6 +78,20 @@ ListenerWindow::ListenerWindow(int listenerId, ListenerController &controller, A
     connect(ui->playlistSongsList, &QListWidget::itemClicked,
             this, &ListenerWindow::onPlaylistSongsClicked);
 
+
+    connect(ui->playButton,&QPushButton::clicked,this,&ListenerWindow::onPlayButtonClicked);
+    connect(ui->prevButton,&QPushButton::clicked,this,&ListenerWindow::onPrevButtonClicked);
+    connect(ui->nextButton,&QPushButton::clicked,this,&ListenerWindow::onNextButtonClicked);
+    connect(ui->volumeSlider,&QSlider::valueChanged,this,&ListenerWindow::onVolumeChanged);
+    connect(&playbackManager, &PlaybackManager::songChanged,this,&ListenerWindow::onSongChanged);
+
+    ui->volumeSlider->setValue(50);
+    ui->volumeSlider->setRange(0,100);
+
+    connect(ui->songList,&QListWidget::itemDoubleClicked,this,&ListenerWindow::onSongDoubleClicked);
+    connect(ui->favoriteList,&QListWidget::itemDoubleClicked,this,&ListenerWindow::onSongDoubleClicked);
+    connect(ui->playlistSongsList,&QListWidget::itemDoubleClicked,this,&ListenerWindow::onSongDoubleClicked);
+
     ui->filterCombo->addItem("None");
     ui->filterCombo->addItem("Genre");
     ui->filterCombo->addItem("Year");
@@ -663,4 +677,71 @@ void ListenerWindow::onRemoveFromPlaylistClicked(){
 void ListenerWindow::onPlaylistSongsClicked(QListWidgetItem* item) {
     Q_UNUSED(item);
     updateActionButtons();
+}
+
+void ListenerWindow::onPlayButtonClicked(){
+    if(playbackManager.isPlaying()){
+        playbackManager.pause();
+        ui->playButton->setText("▶️");
+    }else{
+        playbackManager.play();
+        ui->playButton->setText("⏸️");
+    }
+}
+
+void ListenerWindow::onPrevButtonClicked(){
+    playbackManager.previous();
+}
+
+void ListenerWindow::onNextButtonClicked(){
+    playbackManager.next();
+}
+
+void ListenerWindow::onVolumeChanged(int volume){
+    playbackManager.setVolume(volume);
+}
+
+void ListenerWindow::onSongChanged(const Song& song){
+    ui->nowPlayingLabel->setText("🎵 "+ QString::fromStdString(song.getTitle()));
+    ui->playButton->setText("⏸️");
+}
+
+void ListenerWindow::onSongDoubleClicked(QListWidgetItem* item){
+    int songId = item->data(Qt::UserRole).toInt();
+
+    int currentTab = getCurrentTab();
+    std::vector<Song> playlist;
+
+    if(currentTab == 0){
+        int playlistId = getSelectedItemId(ui->playlistList);
+        if(playlistId != -1){
+            playlist = listenerCtrl.getPlaylistSongs(playlistId);
+        }
+
+    }else if(currentTab == 1){
+        int albumId = getSelectedItemId(ui->albumList);
+        if(albumId != -1){
+            playlist = listenerCtrl.getAlbumSongs(albumId);
+        }
+    }else if(currentTab == 2){
+        playlist = listenerCtrl.getFavoriteSongs(currentListenerId);
+    }
+
+    if(playlist.empty()) return;
+
+    int index=0;
+    for(int i=0;i<(int)playlist.size();i++){
+        if(playlist[i].getId() == songId){
+            index = i;
+            break;
+        }
+    }
+
+    playbackManager.setPlaylist(playlist);
+    for(int i=0;i< index;i++){
+        playbackManager.next();
+    }
+    playbackManager.play();
+    ui->playButton->setText("⏸️");
+    onSongChanged(playlist[index]);
 }

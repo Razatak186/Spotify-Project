@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,6 +80,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="chooseCoverButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 

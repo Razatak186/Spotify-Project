@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>400</height>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,6 +77,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="choosePhotoButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 
@@ -201,6 +204,9 @@ QLineEdit#passwordEdit::placeholder {
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="saveButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton#saveButton {
     background-color: #1DB954;
@@ -226,6 +232,9 @@ QPushButton#saveButton:pressed {
        </item>
        <item>
         <widget class="QPushButton" name="cancelButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton#cancelButton {
     background-color: rgba(231, 76, 60, 0.85);
